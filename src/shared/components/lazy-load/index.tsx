@@ -1,8 +1,7 @@
 import {FC, memo, NamedExoticComponent, Suspense} from "react";
-import Loader from "@/shared/components/loader";
 
 export const LoadComponent = <Props extends object, >(Component: FC<Props>): NamedExoticComponent<Props> => memo((props) => (
-    <Suspense fallback={<Loader/>}>
+    <Suspense fallback={<div/>}>
         <Component {...props} />
     </Suspense>
 ))

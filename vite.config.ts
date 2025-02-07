@@ -1,13 +1,29 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import * as path from 'path'
+import react from '@vitejs/plugin-react-swc'
+import tailwindcss from '@tailwindcss/vite'
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: [
-      {find: '@', replacement: path.resolve(__dirname, 'src')},
-    ]
-  },
+  plugins: [
+      tailwindcss(),
+      react(),
+      tsconfigPaths(),
+  ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    'react': [
+                        'react',
+                        'react-dom',
+                        'react-router-dom'
+                    ],
+                    'lib': [
+                        '@tanstack/react-query',
+                    ],
+                }
+            }
+        }
+    }
 })

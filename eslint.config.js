@@ -19,7 +19,9 @@ export default tseslint.config(
             ecmaVersion: 2020,
             globals: globals.browser
         },
+        settings: { react: { version: '18.3' } },
         plugins: {
+            react,
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh
         },
@@ -42,7 +44,8 @@ export default tseslint.config(
             'max-params': ['error', 3],
             'no-magic-numbers': 'warn',
             'no-new-func': 'error',
-            'no-return-await': 'warn'
+            'no-return-await': 'warn',
+            ...react.configs['jsx-runtime'].rules,
         }
     },
     {

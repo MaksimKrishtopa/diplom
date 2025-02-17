@@ -1,18 +1,21 @@
 import React from 'react';
 
-interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'> {
-    type?: 'primary' | 'secondary' | 'danger';
+enum EButtonProps {
+    primary = "primary",
+    secondary = "secondary",
+    danger = "danger"
 }
 
-const Button: React.FC<ButtonProps> = ({
-                                           onClick,
-                                           children,
-                                           disabled = false,
-                                       }) => {
+interface IButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'> {
+    type?: EButtonProps;
 
+}
+
+const Button = ({type = EButtonProps.primary, ...rest}):IButtonProps =>
+{
     return (
-        <button onClick={onClick} disabled={disabled} className={''}>
-            {children}
+        <button {...rest}>
+            {rest.children}
         </button>
     );
 };

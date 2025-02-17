@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface ButtonProps {
-    onClick: () => void;
-    children: React.ReactNode;
-    disabled?: boolean; // Необязательный пропс
-    className?: string; // Необязательный пропс
+interface ButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'> {
     type?: 'primary' | 'secondary' | 'danger';
 }
 
@@ -12,13 +8,10 @@ const Button: React.FC<ButtonProps> = ({
                                            onClick,
                                            children,
                                            disabled = false,
-                                           className = '',
-                                           type = 'primary',}) => {
-
-    const buttonClass = `btn btn-${type} ${className}`.trim();
+                                       }) => {
 
     return (
-        <button onClick={onClick} disabled={disabled} className={buttonClass}>
+        <button onClick={onClick} disabled={disabled} className={''}>
             {children}
         </button>
     );

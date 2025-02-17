@@ -1,25 +1,19 @@
-import React, { forwardRef, InputHTMLAttributes } from 'react';
+import React, {forwardRef, InputHTMLAttributes} from 'react';
 
-interface InputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     type: string;
     name: string;
     placeholder?: string;
     className: string;
     required: boolean;
+    label: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ type, name, placeholder, className, required, ...rest }, ref) => {
+const Input = forwardRef<HTMLInputElement, IInputProps>(({  ...rest }, ref) => {
     return (
         <label>
-            <input
-                type={type}
-                name={name}
-                placeholder={placeholder}
-                required={required}
-                className={className}
-                ref={ref}
-                {...rest}
-            />
+            {rest.label}
+            <input ref={ref} {...rest}/>
         </label>
     );
 });

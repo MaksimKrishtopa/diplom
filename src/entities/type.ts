@@ -1,5 +1,6 @@
 export interface IAdminProps {
-    id: number;
+    id: string;
     email: string;
     password: string;
 }
+

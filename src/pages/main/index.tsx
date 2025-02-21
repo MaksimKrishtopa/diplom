@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import AuthorizationForm from "@/features/auth/admin/authorizationForm.tsx";
 
 const MainPage = (): ReactNode => {
 
@@ -7,6 +8,7 @@ const MainPage = (): ReactNode => {
             <h1 className="text-3xl font-bold underline">
                 Hello!
             </h1>
+            <AuthorizationForm/>
         </div>
     );
 };

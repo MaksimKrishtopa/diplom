@@ -1,5 +1,6 @@
 import React, {forwardRef, InputHTMLAttributes} from 'react';
 
+
 interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
     type: string;
     name: string;
@@ -8,6 +9,7 @@ interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLIn
     required: boolean;
     label: string;
 }
+
 
 const Input = forwardRef<HTMLInputElement, IInputProps>(({  ...rest }, ref) => {
     return (

@@ -65,7 +65,7 @@ const AuthorizationForm = () => {
                     required={true}
                     label={'Почта'}
                 />
-                {errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
+                {errors.email && <span className="dark:text-blue-400">{errors.email.message}</span>}
 
                 <Input
                     {...register('password')}
@@ -75,7 +75,7 @@ const AuthorizationForm = () => {
                     required={true}
                     label={'Пароль'}
                 />
-                {errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
+                {errors.password && <span className="dark:text-blue-400">{errors.password.message}</span>}
 
                 <button
                     type='submit'
@@ -85,7 +85,7 @@ const AuthorizationForm = () => {
                 </button>
             </form>
 
-            {authMessage && <div style={{color: 'red'}}>{authMessage}</div>}
+            {authMessage && <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">{authMessage}</div>}
         </div>
     );
 };

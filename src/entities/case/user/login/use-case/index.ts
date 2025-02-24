@@ -3,14 +3,14 @@ import {IAdminProps} from "@/entities/type.ts";
 import getAllAdminRepository from "@/entities/repository/user";
 import {updateUserStore} from "@/shared/lid/store/user";
 
-enum EAdminKeyResponse {
+enum EAdminUseCaseKeys {
     keyAuth = "admin-authorization",
 }
 
 
 const useGetAdminsUseCase = () => {
     return useMutation<IAdminProps[], Error, { email: string; password: string }>({
-        mutationKey: [EAdminKeyResponse.keyAuth],
+        mutationKey: [EAdminUseCaseKeys.keyAuth],
         mutationFn: (formData:{ email: string; password: string }) => getAllAdminRepository(formData),
         onSuccess: (data) => {
             if (data.length > 0) {

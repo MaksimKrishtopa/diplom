@@ -1,9 +1,10 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import Input from "@/shared/components/input";
 import useGetMePresenter from "../../../entities/case/user/login/presenter";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useForm} from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import * as yup from 'yup';
+import {UserContext} from "@/app/provider/context/user";
 
 const loginSchema = yup.object().shape({
     email: yup.string().email('Неверный формат email').required('Обязательное поле'),
@@ -16,48 +17,43 @@ interface LoginFormValues {
 }
 
 const AuthorizationForm = () => {
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [formData, setFormData] = useState<LoginFormValues>({ email: '', password: '' });
+    const [message, setMessage] = useState<string | null>(null);
+    const { authError } = useContext(UserContext);
 
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
+        reset
     } = useForm<LoginFormValues>({
         resolver: yupResolver(loginSchema),
         mode: 'onChange',
     });
 
-    const { refetch } = useGetMePresenter(formData.email, formData.password);
+    const { mutate,data,status } = useGetMePresenter();
 
     const onSubmitForm = async (formData: LoginFormValues) => {
-        setErrorMessage(null);
-
-        const { email, password } = formData;
-
-        setFormData(formData);
-
+        setMessage(null);
 
         try {
-            const { data: fetchedData, status: fetchedStatus } = await refetch();
-
-            console.log("Данные после запроса:", fetchedData);
-            console.log("Статус после запроса:", fetchedStatus);
-
-            if (fetchedStatus === "success" && fetchedData) {
-                const admin = fetchedData.find(admin => admin.email === email && admin.password === password);
-                if (admin) {
-                    console.log("Успешная авторизация!", admin);
-                    setErrorMessage(null);
-                } else {
-                    setErrorMessage("Неверные данные!");
+            const request = await mutate(formData);
+            if (data) {
+                if (status=='success') {
+                    console.log("Успешная авторизация!");
+                    setMessage("Вы успешно авторизировались!");
+                    reset();
                 }
-            } else if (fetchedStatus === "error") {
-                setErrorMessage("Ошибка при авторизации");
+                if (status=='error') {
+                    reset();
+                    setMessage("Неверные данные!");
+                }
+            } else {
+                reset()
             }
-        } catch (error) {
+
+        } catch (error: any) {
             console.error("Ошибка при выполнении запроса:", error);
-            setErrorMessage("Ошибка при авторизации");
+            setMessage(error.message || "Ошибка при авторизации");
         }
     };
 
@@ -72,7 +68,7 @@ const AuthorizationForm = () => {
                     required={true}
                     label={'Почта'}
                 />
-                {errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
+                {errors.email && <span style={{ color: 'red' }}>{errors.email.message}</span>}
 
                 <Input
                     {...register('password')}
@@ -82,7 +78,7 @@ const AuthorizationForm = () => {
                     required={true}
                     label={'Пароль'}
                 />
-                {errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
+                {errors.password && <span style={{ color: 'red' }}>{errors.password.message}</span>}
 
                 <button
                     type='submit'
@@ -91,8 +87,7 @@ const AuthorizationForm = () => {
                     Войти
                 </button>
             </form>
-
-            {errorMessage && <div style={{color: 'red'}}>{errorMessage}</div>}
+            {authError && <div style={{ color: 'red' }}>{authError}</div>}
         </div>
     );
 };

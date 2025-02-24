@@ -1,15 +1,11 @@
 import useGetAdmins from "../use-case";
-
-
-const useGetMePresenter = (email: string, password: string) => {
-    const { data, status, error, refetch, isFetching } = useGetAdmins(email, password);
+const useGetMePresenter = () => {
+    const { mutate, data,status} = useGetAdmins();
 
     return {
+        mutate,
         data,
-        status,
-        error,
-        refetch,
-        isFetching,
+        status
     };
 };
 

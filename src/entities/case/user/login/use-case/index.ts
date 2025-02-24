@@ -1,37 +1,30 @@
 import {useMutation} from "@tanstack/react-query";
 import {IAdminProps} from "@/entities/type.ts";
-import {fetchAdmin} from "@/entities/repository";
-import {useContext} from "react";
-import {UserContext} from "@/app/provider/context/user";
-
+import getAllAdminRepository from "@/entities/repository/user";
+import {updateUserStore} from "@/shared/lid/store/user";
 
 enum EAdminKeyResponse {
     keyAuth = "admin-authorization",
 }
 
 
-const useGetAdmins = () => {
-    const { setAuthError} = useContext(UserContext);
+const useGetAdminsUseCase = () => {
     return useMutation<IAdminProps[], Error, { email: string; password: string }>({
         mutationKey: [EAdminKeyResponse.keyAuth],
-        mutationFn: ({ email, password }) => fetchAdmin(email, password),
+        mutationFn: (formData:{ email: string; password: string }) => getAllAdminRepository(formData),
         onSuccess: (data) => {
             if (data.length > 0) {
                 const userData = data[0];
-                // setUser(userData);
-                console.log(userData);
-                setAuthError(null)
-                console.log("Успешная авторизация!", userData);
+                updateUserStore({ user:userData})
+                updateUserStore({ authMessage: 'Успешная авторизация' })
             } else {
-                setAuthError("Неверные данные!");
-                console.log("Неверные данные!");
+                updateUserStore({ authMessage: "Неверные данные!" })
             }
         },
-        onError: (error) => {
-            setAuthError("Ошибка при авторизации");
-            console.error("Ошибка при выполнении запроса:", error);
+        onError: () => {
+            updateUserStore({ authMessage: "Неверные данные!" })
         },
     });
 };
 
-export default useGetAdmins;
+export default useGetAdminsUseCase;

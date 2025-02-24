@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import AuthorizationForm from "@/features/auth/admin/authorizationForm.tsx";
+import AuthorizationForm from "@/features/auth/form/admin/authorization/index.tsx";
 
 const MainPage = (): ReactNode => {
 

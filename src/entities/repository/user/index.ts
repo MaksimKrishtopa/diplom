@@ -14,12 +14,12 @@ function generateAdmins(count: number): IAdminProps[] {
     return admins;
 }
 
-export async function fetchAdmin(email: string, password: string): Promise<IAdminProps[]> {
+async function getAllAdminRepository(formData: { email: string; password: string }): Promise<IAdminProps[]> {
     return new Promise((resolve,reject) => {
         setTimeout(() => {
             const fakeAdmins = generateAdmins(5);
             const filteredAdmins = fakeAdmins.filter(
-                admin => admin.email === email && admin.password === password
+                admin => admin.email === formData.email && admin.password === formData.password
             );
             if (filteredAdmins.length === 0) {
                 reject('Неверные данные!')
@@ -28,3 +28,5 @@ export async function fetchAdmin(email: string, password: string): Promise<IAdmi
         }, 1000);
     });
 }
+
+export default getAllAdminRepository;

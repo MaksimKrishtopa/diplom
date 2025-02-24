@@ -1,10 +1,11 @@
-import {useContext, useState} from 'react';
+import {useState} from 'react';
 import Input from "@/shared/components/input";
-import useGetMePresenter from "../../../entities/case/user/login/presenter";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
 import * as yup from 'yup';
-import {UserContext} from "@/app/provider/context/user";
+import useGetMePresenter from "@/entities/case/user/login/presenter";
+import {useUserStore} from "@/shared/lid/store/user";
+
 
 const loginSchema = yup.object().shape({
     email: yup.string().email('Неверный формат email').required('Обязательное поле'),
@@ -18,41 +19,37 @@ interface LoginFormValues {
 
 const AuthorizationForm = () => {
     const [message, setMessage] = useState<string | null>(null);
-    const { authError } = useContext(UserContext);
+    const {mutateAsync, data, status} = useGetMePresenter();
+    const {authMessage} = useUserStore();
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
         reset
     } = useForm<LoginFormValues>({
         resolver: yupResolver(loginSchema),
         mode: 'onChange',
     });
 
-    const { mutate,data,status } = useGetMePresenter();
 
     const onSubmitForm = async (formData: LoginFormValues) => {
         setMessage(null);
-
         try {
-            const request = await mutate(formData);
+            const request = await mutateAsync(formData);
             if (data) {
-                if (status=='success') {
-                    console.log("Успешная авторизация!");
+                if (status === 'success') {
                     setMessage("Вы успешно авторизировались!");
                     reset();
                 }
-                if (status=='error') {
-                    reset();
+                if (status === 'error') {
                     setMessage("Неверные данные!");
+                    reset();
                 }
             } else {
                 reset()
             }
-
-        } catch (error: any) {
-            console.error("Ошибка при выполнении запроса:", error);
+        } catch (error) {
             setMessage(error.message || "Ошибка при авторизации");
         }
     };
@@ -68,7 +65,7 @@ const AuthorizationForm = () => {
                     required={true}
                     label={'Почта'}
                 />
-                {errors.email && <span style={{ color: 'red' }}>{errors.email.message}</span>}
+                {errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
 
                 <Input
                     {...register('password')}
@@ -78,7 +75,7 @@ const AuthorizationForm = () => {
                     required={true}
                     label={'Пароль'}
                 />
-                {errors.password && <span style={{ color: 'red' }}>{errors.password.message}</span>}
+                {errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
 
                 <button
                     type='submit'
@@ -87,7 +84,8 @@ const AuthorizationForm = () => {
                     Войти
                 </button>
             </form>
-            {authError && <div style={{ color: 'red' }}>{authError}</div>}
+
+            {authMessage && <div style={{color: 'red'}}>{authMessage}</div>}
         </div>
     );
 };

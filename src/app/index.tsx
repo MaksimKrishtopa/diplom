@@ -4,7 +4,6 @@ import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {RouterProvider} from "react-router-dom";
 import router from "@/app/router";
 import ErrorBoundaryProvider from "@/app/provider/error-boundary";
-import {UserProvider} from "@/app/provider/context/user";
 
 const client = new QueryClient({
     defaultOptions: {
@@ -24,12 +23,10 @@ const client = new QueryClient({
 const App = (): ReactNode => {
     return (
         <ErrorBoundaryProvider>
-            <UserProvider>
-                <QueryClientProvider client={client}>
-                    <ReactQueryDevtools initialIsOpen={false}/>
-                    <RouterProvider router={router}/>
-                </QueryClientProvider>
-            </UserProvider>
+            <QueryClientProvider client={client}>
+                <ReactQueryDevtools initialIsOpen={false}/>
+                <RouterProvider router={router}/>
+            </QueryClientProvider>
         </ErrorBoundaryProvider>
     );
 };

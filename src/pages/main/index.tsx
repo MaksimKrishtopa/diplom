@@ -1,14 +1,11 @@
 import {ReactNode} from 'react';
-import AuthorizationForm from "@/features/auth/form/admin/authorization/index.tsx";
+import AuthorizationFormUser from "@/features/auth/form/user/authorization";
 
 const MainPage = (): ReactNode => {
 
     return (
         <div>
-            <h1 className="text-3xl font-bold underline">
-                Hello!
-            </h1>
-            <AuthorizationForm/>
+           <AuthorizationFormUser/>
         </div>
     );
 };

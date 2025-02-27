@@ -1,10 +1,9 @@
-import {useState} from 'react';
 import Input from "@/shared/components/input";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 import * as yup from 'yup';
 import useGetMePresenter from "@/entities/case/user/login/presenter";
-import {useUserStore} from "@/shared/lid/store/user";
+import {useUserStore} from "@/shared/lib/store/user";
 
 
 const loginSchema = yup.object().shape({
@@ -18,15 +17,13 @@ interface LoginFormValues {
 }
 
 const AuthorizationForm = () => {
-    const [message, setMessage] = useState<string | null>(null);
-    const {mutateAsync, data, status} = useGetMePresenter();
+    const {mutateAsync} = useGetMePresenter();
     const {authMessage} = useUserStore();
 
     const {
         register,
         handleSubmit,
         formState: {errors},
-        reset
     } = useForm<LoginFormValues>({
         resolver: yupResolver(loginSchema),
         mode: 'onChange',
@@ -34,23 +31,10 @@ const AuthorizationForm = () => {
 
 
     const onSubmitForm = async (formData: LoginFormValues) => {
-        setMessage(null);
         try {
-            const request = await mutateAsync(formData);
-            if (data) {
-                if (status === 'success') {
-                    setMessage("Вы успешно авторизировались!");
-                    reset();
-                }
-                if (status === 'error') {
-                    setMessage("Неверные данные!");
-                    reset();
-                }
-            } else {
-                reset()
-            }
+            await mutateAsync(formData);
         } catch (error) {
-            setMessage(error.message || "Ошибка при авторизации");
+            console.log(error);
         }
     };
 
@@ -79,13 +63,15 @@ const AuthorizationForm = () => {
 
                 <button
                     type='submit'
-                    className="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+
+                    className="focus:outline-none  text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
                 >
                     Войти
                 </button>
             </form>
 
-            {authMessage && <div className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">{authMessage}</div>}
+            {authMessage && <div
+                className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">{authMessage}</div>}
         </div>
     );
 };

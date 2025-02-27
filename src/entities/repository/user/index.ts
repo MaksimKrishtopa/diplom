@@ -1,7 +1,7 @@
-import { IAdminProps } from "@/entities/type.ts";
+import { IAdminDto } from "@/shared/interface/user/dto/type.ts";
 
-function generateAdmins(count: number): IAdminProps[] {
-    const admins: IAdminProps[] = [];
+function generateAdmins(count: number): IAdminDto[] {
+    const admins: IAdminDto[] = [];
 
     for (let i = 0; i < count; i++) {
         admins.push({
@@ -14,19 +14,21 @@ function generateAdmins(count: number): IAdminProps[] {
     return admins;
 }
 
-async function getAllAdminRepository(formData: { email: string; password: string }): Promise<IAdminProps[]> {
-    return new Promise((resolve,reject) => {
+async function getAuthorizeAdminRepository(formData: { email: string; password: string }): Promise<IAdminDto[]> {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const fakeAdmins = generateAdmins(5);
-            const filteredAdmins = fakeAdmins.filter(
+            const fakeAdmins = generateAdmins(1);
+
+            const foundAdmin = fakeAdmins.find(
                 admin => admin.email === formData.email && admin.password === formData.password
             );
-            if (filteredAdmins.length === 0) {
-                reject('Неверные данные!')
+            if (!foundAdmin) {
+                reject('Неверные данные!');
+            } else {
+                resolve([foundAdmin]);
             }
-            resolve(filteredAdmins);
         }, 1000);
     });
 }
 
-export default getAllAdminRepository;
+export default getAuthorizeAdminRepository;

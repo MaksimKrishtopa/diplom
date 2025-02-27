@@ -1,6 +1,6 @@
-import useGetAdminsUseCase from "../use-case";
+import useAuthAdminsUseCase from "../use-case";
 const useGetMePresenter = () => {
-    const { mutateAsync, data,status} = useGetAdminsUseCase();
+    const { mutateAsync, data,status} = useAuthAdminsUseCase();
 
     return {
         mutateAsync,

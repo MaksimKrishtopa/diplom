@@ -1,17 +1,18 @@
 import {useMutation} from "@tanstack/react-query";
-import {IAdminProps} from "@/entities/type.ts";
-import getAllAdminRepository from "@/entities/repository/user";
-import {updateUserStore} from "@/shared/lid/store/user";
+import {IAdminDto} from "@/shared/interface/user/dto/type.ts";
+import getAuthorizeAdminRepository from "@/entities/repository/user";
+import {updateUserStore} from "@/shared/lib/store/user";
+import {EAdminUseCaseKeys} from "@/shared/enum/mutation-key";
+import {IAuthPort} from "@/shared/interface/user/port";
 
-enum EAdminUseCaseKeys {
-    keyAuth = "admin-authorization",
-}
+const execute = async (formData: IAuthPort) => {
+    return getAuthorizeAdminRepository(formData);
+};
 
-
-const useGetAdminsUseCase = () => {
-    return useMutation<IAdminProps[], Error, { email: string; password: string }>({
+const useAuthAdminsUseCase = () => {
+    return useMutation<IAdminDto[], Error, IAuthPort>({
         mutationKey: [EAdminUseCaseKeys.keyAuth],
-        mutationFn: (formData:{ email: string; password: string }) => getAllAdminRepository(formData),
+        mutationFn: (formData:{ email: string; password: string }) => execute(formData),
         onSuccess: (data) => {
             if (data.length > 0) {
                 const userData = data[0];
@@ -27,4 +28,5 @@ const useGetAdminsUseCase = () => {
     });
 };
 
-export default useGetAdminsUseCase;
+
+export default useAuthAdminsUseCase;

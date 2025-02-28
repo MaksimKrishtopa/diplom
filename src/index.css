@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 :root {
     --color-primary: #5687BB;
     --color-primary-border: #FFFFFF 2px;
@@ -31,6 +30,11 @@
 }
 
 
+
+p,span,input,button{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 html {
     font-size: 18px;
 }
@@ -45,4 +49,12 @@ html {
 
 .text-success {
     @apply font-normal text-[14px] leading-[19.6px] tracking-normal text-[#27AE60]
+}
+
+.icon-password {
+    @apply w-[24px] h-[24px];
+}
+
+.icon-password-passiv {
+    @apply bg-[url(./shared/icon/password_icon_passiv.svg)] w-[24px] h-[24px] bg-no-repeat;
 }

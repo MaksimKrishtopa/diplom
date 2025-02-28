@@ -1,11 +1,11 @@
 import {ReactNode} from 'react';
-import AuthorizationFormUser from "@/features/auth/form/user/authorization";
+import AuthUserPage from "@/pages/auth";
 
 const MainPage = (): ReactNode => {
 
     return (
         <div>
-           <AuthorizationFormUser/>
+            <AuthUserPage/>
         </div>
     );
 };

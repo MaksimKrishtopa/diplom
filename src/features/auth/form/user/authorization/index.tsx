@@ -42,7 +42,7 @@ const AuthorizationFormUser = () => {
                 className="flex justify-center w-[708.92px] h-[770px] pt-[90px] rounded-tl-[40px] rounded-bl-[40px] bg-[#D9D9D9F2]">
                 <form className="flex justify-center flex-col items-center gap-[42px]"
                       onSubmit={handleSubmit(onSubmitForm)}>
-                    <h4 className="justify-center font-poppins font-extrabold text-[28px] leading-6 tracking-normal text-[#5687BB] mb-[12px]">
+                    <h4 className="justify-center font-poppins font-bold font-poppins text-2xl text-[28px] leading-6 tracking-normal text-[#5687BB] mb-[12px]">
                         Войти в аккаунт
                     </h4>
                     <div className="flex flex-col items-center">
@@ -90,7 +90,7 @@ const AuthorizationFormUser = () => {
             </div>
             <div
                 className="flex flex-col items-center w-[406.15386962890625px] gap-[83px] h-[770px] rounded-tr-[40px] rounded-br-[40px] bg-[#5687BBF2]">
-                <h4 className="font-poppins font-extrabold text-[28px] pt-[189px] leading-6 tracking-normal text-[#F0F4F3]">
+                <h4 className="font-poppins font-bold text-[28px] pt-[189px] leading-6 tracking-normal text-[#F0F4F3]">
                     С ВОЗВРАЩЕНИЕМ
                 </h4>
                 <p className="w-[302px] h-[95px] font-normal text-[18px] text-[#F0F4F3]">
@@ -98,7 +98,7 @@ const AuthorizationFormUser = () => {
                 </p>
                 <button
                     className="flex justify-center font-bold w-[190px] h-[60px] pt-[16px] pr-[103px] pb-[16px]
-                    pl-[103px] text-[16px] text-[#FFFFFF] rounded-[30px] border-2 border-[#FFFFFF] bg-[#5687BB] ">Зарегистироваться
+                    pl-[103px] text-[16px] cursor-pointer text-[#FFFFFF] rounded-[30px] border-2 border-[#FFFFFF] bg-[#5687BB] ">Зарегистироваться
                 </button>
             </div>
         </div>

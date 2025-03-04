@@ -1,77 +1,58 @@
 import Input from "@/shared/components/input";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useForm} from "react-hook-form";
-import * as yup from 'yup';
-import useGetMePresenter from "@/entities/case/user/login/presenter";
 import {useUserStore} from "@/shared/lib/store/user";
+import useAuthAdminsPresenter from "@/entities/case/user/login/presenter";
+import ErrorMessage from "@/shared/components/error-message";
 
-const loginSchema = yup.object().shape({
-    email: yup.string().email('Неверный формат email').required('Обязательное поле'),
-    password: yup.string().min(6, 'Минимум 6 символов').required('Обязательное поле'),
-});
-
-interface LoginFormValues {
-    email: string;
-    password: string;
-}
 
 const AuthorizationFormUser = () => {
-    const {mutateAsync} = useGetMePresenter();
+    const {handleSubmit, formState: {errors}, register} = useAuthAdminsPresenter();
     const {authMessage} = useUserStore();
 
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-    } = useForm<LoginFormValues>({
-        resolver: yupResolver(loginSchema),
-        mode: 'onChange',
-    });
-
-
-    const onSubmitForm = async (formData: LoginFormValues) => {
-        try {
-            await mutateAsync(formData);
-        } catch (error) {
-            console.log(error);
-        }
-    };
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div
-                className="flex justify-center w-[708.92px] h-[770px] pt-[90px] rounded-tl-[40px] rounded-bl-[40px] bg-[#D9D9D9F2]">
-                <form className="flex justify-center flex-col items-center gap-[42px]"
-                      onSubmit={handleSubmit(onSubmitForm)}>
+                className="flex justify-center background-light">
+                <form noValidate className="flex justify-center flex-col items-center gap-[42px]"
+                      onSubmit={handleSubmit}>
                     <h4 className="justify-center font-poppins font-bold font-poppins text-2xl text-[28px] leading-6 tracking-normal text-[#5687BB] mb-[12px]">
                         Войти в аккаунт
                     </h4>
                     <div className="flex flex-col items-center">
-                        <div className="flex items-start flex-col ">
+                        <div className="flex items-start flex-col">
                             <Input
-                                {...register('email')}
                                 type={'email'}
-                                name={'email'}
                                 required={true}
                                 label={'E-mail'}
+                                max={255}
+                                {...register('email', {
+                                    required:'Обязательное поле',
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                                        message: 'Неверный email или пароль',
+                                    },
+                                })}
                             />
-                            {errors.email && <span className="text-warning mr-57">{errors.email.message}</span>}
+                            <ErrorMessage message={errors.email?.message} />
                         </div>
                     </div>
                     <div className="flex flex-col items-center">
                         <div className="flex items-start flex-col ">
                             <Input
-                                {...register('password')}
                                 type={'password'}
-                                name={'password'}
                                 required={true}
                                 label={'Пароль'}
+                                max={100}
+                                {...register('password', {
+                                    required: 'Обязательное поле',
+                                    pattern: {
+                                        value: /^[0-9a-zA-Z-_!?]+/,
+                                        message: 'Неверный email или пароль',
+                                    },
+                                })}
                             />
-                            {errors.password && (
-                                <span className="text-warning pt-1 text-sm">{errors.password.message}</span>
-                            )}
+                            <ErrorMessage message={errors.password?.message} />
                         </div>
                     </div>
-
                     <button
                         type='submit'
                         className="cursor-pointer w-[412px] h-[60px] rounded-[8px] border-2 bg-[#5687BB]
@@ -89,7 +70,7 @@ const AuthorizationFormUser = () => {
                 </form>
             </div>
             <div
-                className="flex flex-col items-center w-[406.15386962890625px] gap-[83px] h-[770px] rounded-tr-[40px] rounded-br-[40px] bg-[#5687BBF2]">
+                className="flex flex-col items-center gap-[83px] background-blue">
                 <h4 className="font-poppins font-bold text-[28px] pt-[189px] leading-6 tracking-normal text-[#F0F4F3]">
                     С ВОЗВРАЩЕНИЕМ
                 </h4>
@@ -98,7 +79,7 @@ const AuthorizationFormUser = () => {
                 </p>
                 <button
                     className="flex justify-center font-bold w-[190px] h-[60px] pt-[16px] pr-[103px] pb-[16px]
-                    pl-[103px] text-[16px] cursor-pointer text-[#FFFFFF] rounded-[30px] border-2 border-[#FFFFFF] bg-[#5687BB] ">Зарегистироваться
+                    pl-[103px] text-[16px] cursor-pointer text-[#FFFFFF] rounded-[30px] border-2 border-[#FFFFFF]">Зарегистироваться
                 </button>
             </div>
         </div>

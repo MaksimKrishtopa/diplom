@@ -1,4 +1,5 @@
 import { IAdminDto } from "@/shared/interface/user/dto/type.ts";
+import {IAuthPort} from "@/shared/interface/user/port";
 
 function generateAdmins(count: number): IAdminDto[] {
     const admins: IAdminDto[] = [];
@@ -14,11 +15,10 @@ function generateAdmins(count: number): IAdminDto[] {
     return admins;
 }
 
-async function getAuthorizeAdminRepository(formData: { email: string; password: string }): Promise<IAdminDto[]> {
+async function getAuthorizeAdminRepository(formData: IAuthPort): Promise<IAdminDto[]> {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const fakeAdmins = generateAdmins(1);
-
             const foundAdmin = fakeAdmins.find(
                 admin => admin.email === formData.email && admin.password === formData.password
             );

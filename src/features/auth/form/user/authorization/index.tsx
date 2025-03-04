@@ -11,10 +11,10 @@ const AuthorizationFormUser = () => {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div
-                className="flex justify-center background-light">
-                <form noValidate className="flex justify-center flex-col items-center gap-[42px]"
+                className="flex justify-center items-center background-light shadow-3xl">
+                <form noValidate className="flex justify-center flex-col items-center gap-[40px]"
                       onSubmit={handleSubmit}>
-                    <h4 className="justify-center font-poppins font-bold font-poppins text-2xl text-[28px] leading-6 tracking-normal text-[#5687BB] mb-[12px]">
+                    <h4 className="justify-center font-bold font-poppins text-title tracking-normal text-blue-text mb-[50px]">
                         Войти в аккаунт
                     </h4>
                     <div className="flex flex-col items-center">
@@ -25,14 +25,14 @@ const AuthorizationFormUser = () => {
                                 label={'E-mail'}
                                 max={255}
                                 {...register('email', {
-                                    required:'Обязательное поле',
+                                    required: 'Обязательное поле',
                                     pattern: {
                                         value: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
                                         message: 'Неверный email или пароль',
                                     },
                                 })}
                             />
-                            <ErrorMessage message={errors.email?.message} />
+                            <ErrorMessage message={errors.email?.message}/>
                         </div>
                     </div>
                     <div className="flex flex-col items-center">
@@ -50,36 +50,36 @@ const AuthorizationFormUser = () => {
                                     },
                                 })}
                             />
-                            <ErrorMessage message={errors.password?.message} />
+                            <ErrorMessage message={errors.password?.message}/>
                         </div>
                     </div>
                     <button
                         type='submit'
-                        className="cursor-pointer w-[412px] h-[60px] rounded-[8px] border-2 bg-[#5687BB]
-                        border-[#FFFFFF] text-[#FFFFFF] font-bold pt-[16px] pr-[103px] pb-[16px] pl-[103px]"
+                        className="cursor-pointer w-[412px] h-[60px] rounded-[8px] border-2 bg-primary
+                        border-primary-border text-white-text font-bold py-4 px-[103px] mt-[25px]"
                     >
                         ВОЙТИ
                     </button>
                     {authMessage && <div className="text-error p-[5px]">{authMessage}</div>}
                     <div>
                         <hr className="border-[#5687BB] w-[412px] border-2"></hr>
-                        <p className="flex justify-center font-roboto text-[16px] font-normal text-lg leading-6 tracking-normal text-[#5687BB] mt-[15px]">
+                        <p className="flex justify-center font-roboto text-paragraph-lg font-normal text-lg tracking-normal text-blue-text mt-[13px]">
                             Забыли пароль?
                         </p>
                     </div>
                 </form>
             </div>
             <div
-                className="flex flex-col items-center gap-[83px] background-blue">
-                <h4 className="font-poppins font-bold text-[28px] pt-[189px] leading-6 tracking-normal text-[#F0F4F3]">
+                className="flex flex-col justify-center items-center gap-[90px] background-blue shadow-3xl">
+                <h4 className="font-poppins font-bold text-title tracking-normal text-white-text">
                     С ВОЗВРАЩЕНИЕМ
                 </h4>
-                <p className="w-[302px] h-[95px] font-normal text-[18px] text-[#F0F4F3]">
+                <p className="w-[264px] h-[95px] font-normal text-paragraph-xl text-white-text">
                     Мы рады видеть Вас снова на нашем блоге о путешествиях. Войдите в систему, указав верные данные.
                 </p>
                 <button
-                    className="flex justify-center font-bold w-[190px] h-[60px] pt-[16px] pr-[103px] pb-[16px]
-                    pl-[103px] text-[16px] cursor-pointer text-[#FFFFFF] rounded-[30px] border-2 border-[#FFFFFF]">Зарегистироваться
+                    className="flex justify-center font-bold w-[190px] h-[60px] py-4 px-[103px]
+                     text-paragraph-lg cursor-pointer text-white-text rounded-[30px] border-2 border-primary-border">Зарегистироваться
                 </button>
             </div>
         </div>

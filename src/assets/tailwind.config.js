@@ -1,17 +1,21 @@
 module.exports = {
+    content: ['./src/**/*.{js,ts,tsx}',
+    './pages/**/*.{html,js,tsx}',
+    '././index.html'],
     theme: {
+        fontSize: {
+            58: '58px',
+        },
         extend: {
             fontFamily: {
                 poppins: ['Poppins', 'sans-serif'],
             },
             colors: {
-                'color-blue': '#5687BBF2',
-                'color-light': '#D9D9D9F2',
-                'white': '#F0F4F3',
+                blue: '#5687BBF2',
+                light: '#D9D9D9F2',
+                white: '#5687BBF2',
             },
-            fontSize: {
-                '28': '28px',
-            },
+
         },
     },
 };

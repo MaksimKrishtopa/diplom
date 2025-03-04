@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(({...rest}, ref) => {
                 <button
                     type="button"
                     onClick={toggleShowPassword}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#5687BB]"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-text"
                 >
                     {showPassword ? <img alt="иконка пароля" src={iconPasswordActive} className="icon-password"></img> :
                         <img alt="иконка пароля" src={iconPasswordDefault}

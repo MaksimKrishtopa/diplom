@@ -1,6 +1,7 @@
-export interface IAdminDto {
+import IUser from "@/shared/interface/user/enitites";
+
+interface IAdminDto extends IUser {
     id: string;
-    email: string;
-    password: string;
 }
+export default IAdminDto
 

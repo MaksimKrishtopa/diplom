@@ -1,5 +1,5 @@
 import { Store, useStore } from "@tanstack/react-store";
-import {IUserStore} from "@/shared/interface/user/store";
+import IUserStore from "@/shared/interface/user/store";
 
 
 const userStore = new Store<IUserStore>({

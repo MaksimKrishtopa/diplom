@@ -1,39 +1,33 @@
 @import "tailwindcss";
 
-/*:root {*/
-/*    --color-primary: #5687BB;*/
-/*    --color-primary-border: #FFFFFF 2px;*/
-/*    --color-primary-hover: #007BA7;*/
-/*    --color-primary-active: #5687BB;*/
-/*    --color-primary-disable: #E0E0E0;*/
-
-/*    --color-secondary: #1C232D;*/
-/*    --color-secondary-hover: #222B39;*/
-
-
-/*    --color-white: #F0F4F3;*/
-/*    --color-white-500: #E6E6F8;*/
-
-/*    --color-success-text: #27AE60;*/
-/*    --color-success-secondary: #1DCB8C;*/
-
-/*    --color-error-text: #EB5757;*/
-/*    --color-warning-text: #E2B93B;*/
-
-/*}*/
-
-
 @theme {
     --color-primary: #5687BB;
-    --color-primary-border: #FFFFFF 2px;
+    --color-primary-border: #5687BB 2px;
     --color-primary-hover: #007BA7;
-    --color-primary-active: #5687BB;
+    --color-primary-active: #0A4A61;
     --color-primary-disable: #E0E0E0;
+    --color-primary-disable-border: #C7C5C5;
 
-    --color-secondary: #1C232D;
-    --color-secondary-hover: #222B39;
+    --color-secondary: #5687BB1F;
+    --color-secondary-border: #5687BB 2px;
+    --color-secondary-hover: #007BA729;
+    --color-secondary-hover-border: #007BA7 2px;
+    --color-secondary-active: #0A4A6129;
+    --color-secondary-active-border: #0A4A61 2px;
+    --color-secondary-disable: #E0E0E029;
+    --color-secondary-disable-border: #C7C5C5 2px;
 
-    --color-white-background: #ECECECF2;
+
+    --color-selective: #7E9E7F;
+    --color-selective-border: #3DC13C 2px;
+    --color-selective-hover: #65A266;
+    --color-selective-active: #6F9870;
+    --color-selective-disable: #E0E0E0;
+    --color-selective-disable-border: #C7C5C5 2px;
+
+
+    --color-white-background: #FFFFFF;
+    --shadow-3xl-white-background: 0px 0px 40px rgba(86, 135, 187, 0.24);
     --color-blue-background: #5687BBF2;
     --color-white-500: #E6E6F8;
 
@@ -42,6 +36,10 @@
 
     --color-white-text: #F0F4F3;
     --color-blue-text: #5687BB;
+
+    --color-input-background:#FAFAFA;
+    --color-input-border:#D1D1D1;
+    --color-input-border-active:#5687BB;
 
     --color-success-text: #27AE60;
     --color-success-secondary: #1DCB8C;
@@ -54,6 +52,7 @@
     --text-paragraph-sm: 12px;
     --text-paragraph-xs: 10px;
     --shadow-3xl: 10px 10px 6px rgba(0, 0, 0, 0.25);
+
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -79,20 +78,21 @@ p, span, input, button {
 }
 
 .input {
-    @apply w-[412px] h-[50px] text-paragraph-sm text-[#007BA7] focus:border-[#5687BB]
-    focus:outline-none bg-[#FFFFFF]
-    focus:text-[#007BA7] cursor-pointer rounded-[5px] border-2 border-[#5687BB]
-    flex justify-between pt-[12px] pr-[20px] pb-[5px] pl-[15px]
+    @apply text-paragraph-lg text-[#040405] focus:border-input-border-active
+        hover:border-input-border-active focus:outline-none bg-input-background w-[346px] h-[48px]
+        cursor-pointer rounded-[16px] border-2 border-input-border
+        flex justify-between py-[12px] px-[16px] leading-[24px]
 }
 
 .background-light {
-    @apply w-[708px] h-[770px] pt-[90px] rounded-s-[40px] bg-white-background
+    @apply p-[32px] rounded-[24px] bg-white-background
 }
 
 .background-blue {
     @apply w-[406px] h-[770px] rounded-e-[40px] bg-blue-background
 }
 
-.custom-label {
-    @apply cursor-pointer block absolute left-[17px] top-[5px] text-[#5687BB] text-[10px] transition-all duration-200
+label {
+    @apply mb-[4px] text-[#040405] text-[14px] font-normal
 }
+

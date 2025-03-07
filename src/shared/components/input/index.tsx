@@ -11,33 +11,33 @@ interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLIn
 }
 
 
-const Input = forwardRef<HTMLInputElement, IInputProps>(({...rest}, ref) => {
+const Input = forwardRef<HTMLInputElement, IInputProps>(({...props}, ref) => {
     const [showPassword, setShowPassword] = useState(false)
     const toggleShowPassword = () => setShowPassword((showPassword) => !showPassword);
-    const isPasswordField = rest.type === "password";
+    const isPasswordField = props.type === "password";
     return (
         <div className="relative">
+            <label
+                className="cursor-pointer font-roboto ">
+                {props.label}
+            </label>
             <input
-                ref={ref} {...rest}
-                type={isPasswordField && showPassword ? "text" : rest.type}
-                className='input font-roboto font-inherit'
+                ref={ref} {...props}
+                type={isPasswordField && showPassword ? "text" : props.type}
+                className='input font-roboto font-normal'
                 required
             />
             {isPasswordField && (
                 <button
                     type="button"
                     onClick={toggleShowPassword}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-text"
+                    className="absolute right-3.5 top-1/2 transform -translate-y-1/2.5 text-blue-text"
                 >
                     {showPassword ? <img alt="иконка пароля" src={iconPasswordActive} className="icon-password"></img> :
                         <img alt="иконка пароля" src={iconPasswordDefault}
                              className="icon-password-passiv"></img>}
                 </button>
             )}
-            <label
-                className="custom-label cursor-pointer font-roboto">
-                {rest.label}
-            </label>
         </div>
     );
 });

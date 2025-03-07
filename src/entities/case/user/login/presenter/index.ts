@@ -1,12 +1,20 @@
 import useAuthAdminsUseCase from "../use-case";
 import {useForm} from "react-hook-form";
-import {IAuthPort} from "@/shared/interface/user/port";
+import IAuthPort from "@/shared/interface/user/port";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {loginSchema} from "../validate-schema";
 import {updateUserStore} from "@/shared/lib/store/user";
+import {loginSchema} from "@/entities/case/user/login/validate-schema";
+import {useNavigate} from "react-router-dom";
+import ERouterPath from "@/shared/common/enum/router";
+import {UserContext} from "@/shared/hook";
+import {useContext} from "react";
 
 const useAuthAdminsPresenter = () => {
     const {mutateAsync, data, status} = useAuthAdminsUseCase();
+    const { login } = useContext(UserContext)
+    const navigate = useNavigate();
+
+
 
     const {
         register,
@@ -20,10 +28,9 @@ const useAuthAdminsPresenter = () => {
     const onSubmit = async (formData: IAuthPort) => {
         try {
             const result = await mutateAsync(formData);
-            if (result.length > 0) {
-                const userData = result[0];
-                updateUserStore({user: userData});
-                updateUserStore({authMessage: 'Успешная авторизация'});
+            if (result) {
+                login(JSON.stringify(result));
+                navigate(ERouterPath.HOME_PAGE)
             } else {
                 updateUserStore({authMessage: 'Неверный email или пароль'});
             }

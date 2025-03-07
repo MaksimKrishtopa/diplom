@@ -1,8 +1,8 @@
 import {useMutation} from "@tanstack/react-query";
-import {IAdminDto} from "@/shared/interface/user/dto/type.ts";
+import IAdminDto from "@/shared/interface/user/dto/type.ts";
 import getAuthorizeAdminRepository from "@/entities/repository/user";
-import {EAdminUseCaseKeys} from "@/shared/enum/mutation-key";
-import {IAuthPort} from "@/shared/interface/user/port";
+import EAdminUseCaseKeys from "@/shared/enum/mutation-key";
+import IAuthPort from "@/shared/interface/user/port";
 
 
 
@@ -11,7 +11,7 @@ const useAuthAdminsUseCase = () => {
         return getAuthorizeAdminRepository(formData);
     };
 
-    return useMutation<IAdminDto[], Error, IAuthPort>({
+    return useMutation<IAdminDto, Error, IAuthPort>({
         mutationKey: [EAdminUseCaseKeys.keyAuth],
         mutationFn: execute,
     });

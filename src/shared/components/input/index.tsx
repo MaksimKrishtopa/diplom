@@ -9,10 +9,11 @@ interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLIn
     className?: string;
     required: boolean;
     label: string;
+    validationError?: boolean;
 }
 
 
-const Input = forwardRef<HTMLInputElement, IInputProps>(({...props}, ref) => {
+const Input = forwardRef<HTMLInputElement, IInputProps>(({validationError, ...props}, ref) => {
     const [showPassword, setShowPassword] = useState(false)
     const toggleShowPassword = () => setShowPassword((showPassword) => !showPassword);
     const isPasswordField = props.type === "password";
@@ -25,7 +26,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(({...props}, ref) => {
             <input
                 ref={ref} {...props}
                 type={isPasswordField && showPassword ? "text" : props.type}
-                className={`input font-roboto font-normal ${props.className}`}
+                className={`input font-roboto font-normal ${validationError ? "border-input-border-error": 'border-input-border'} ${props.className}`}
                 required
             />
             {isPasswordField && (

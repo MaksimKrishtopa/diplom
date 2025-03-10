@@ -39,6 +39,7 @@
 
     --color-input-background: #FAFAFA;
     --color-input-border: #D1D1D1;
+    --color-input-border-error: #EB5757;
     --color-input-border-active: #5687BB;
 
     --color-success-text: #27AE60;
@@ -80,7 +81,7 @@ p, span, input, button {
 .input {
     @apply text-paragraph-lg text-[#040405] focus:border-input-border-active
     hover:border-input-border-active focus:outline-none bg-input-background
-    cursor-pointer rounded-[16px] border-2 border-input-border
+    cursor-pointer rounded-[16px] border-2
     flex justify-between py-[12px] px-[16px] leading-[24px]
 }
 

@@ -35,6 +35,7 @@ const AuthorizationFormUser = () => {
                                 label={'E-mail'}
                                 className={'w-[346px] h-[48px]'}
                                 placeholder={'Введите e-mail'}
+                                validationError={!!errors.email}
                                 max={255}
                                 {...register('email')}
                             />
@@ -47,6 +48,7 @@ const AuthorizationFormUser = () => {
                                 label={'Пароль'}
                                 className={'w-[346px] h-[48px]'}
                                 placeholder={'Введите пароль'}
+                                validationError={!!errors.password}
                                 max={100}
                                 {...register('password')}
                             />

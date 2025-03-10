@@ -26,7 +26,27 @@ const Button: React.FC<StyledButtonProps> = ({
                 className
             )}
             {...props}
-        />
+        ></button>
+=======
+
+enum EButtonProps {
+    primary = "primary",
+    secondary = "secondary",
+    danger = "danger"
+}
+
+interface IButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'> {
+    type?: EButtonProps;
+
+}
+
+const Button = ({type = EButtonProps.primary, ...rest}):IButtonProps =>
+{
+    return (
+        <button {...rest}>
+            {rest.children}
+        </button>
+>>>>>>> src/shared/components/button/index.tsx
     );
 };
 

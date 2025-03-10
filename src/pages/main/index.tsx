@@ -1,12 +1,13 @@
-import {ReactNode} from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const MainPage = (): ReactNode => {
-
+const MainPage: React.FC = () => {
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">
-                Hello!
-            </h1>
+        <div className="flex flex-col">
+            <h1 className="text-3xl font-bold underline">Hello!</h1>
+            <Link to="/recovery" className="text-[#5687BB] text-[16px] font-[400]">
+                Забыли пароль?
+            </Link>
         </div>
     );
 };

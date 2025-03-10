@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@import '@fontsource/roboto';
+@import '@fontsource/poppins';
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Poppins", sans-serif;
+}
+
+
+p, label, span, input, button {
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+}

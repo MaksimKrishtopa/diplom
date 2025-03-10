@@ -7,11 +7,11 @@ enum EButtonProps {
 }
 
 interface IButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'> {
-    type?: EButtonProps;
+    type?: `${EButtonProps}`;
 
 }
 
-const Button = ({type = EButtonProps.primary, ...rest}):IButtonProps =>
+const Button: React.FC<IButtonProps> = ({ type = EButtonProps.primary, ...rest }) =>
 {
     return (
         <button {...rest}>

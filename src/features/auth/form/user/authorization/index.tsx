@@ -1,5 +1,4 @@
 import Input from "@/shared/components/input";
-import {useUserStore} from "@/shared/lib/store/user";
 import useAuthAdminsPresenter from "@/entities/case/user/login/presenter";
 import ErrorMessage from "@/shared/components/error-message";
 import Button from "@/shared/components/button";
@@ -8,7 +7,6 @@ import {backgroundShapes, logo} from "@/shared/icon";
 
 const AuthorizationFormUser = () => {
     const {handleSubmit, formState: {errors}, register} = useAuthAdminsPresenter();
-    const {authMessage} = useUserStore();
 
     return (
         <div className="flex justify-center items-center background-light w-[fit-content] h-[fit-content] shadow-3xl-white-background">
@@ -35,6 +33,7 @@ const AuthorizationFormUser = () => {
                                 type={'email'}
                                 required={true}
                                 label={'E-mail'}
+                                className={'w-[346px] h-[48px]'}
                                 placeholder={'Введите e-mail'}
                                 max={255}
                                 {...register('email')}
@@ -46,6 +45,7 @@ const AuthorizationFormUser = () => {
                                 type={'password'}
                                 required={true}
                                 label={'Пароль'}
+                                className={'w-[346px] h-[48px]'}
                                 placeholder={'Введите пароль'}
                                 max={100}
                                 {...register('password')}
@@ -62,7 +62,7 @@ const AuthorizationFormUser = () => {
                         <Button styleType='primary' type='submit'>Войти</Button>
                         <Button styleType='secondary' type='submit'>Создать аккаунт</Button>
                     </div>
-                    {authMessage && <div className="text-error p-[5px]">{authMessage}</div>}
+                    {errors.root && <p>{errors.root.message}</p>}
                 </form>
             </div>
         </div>

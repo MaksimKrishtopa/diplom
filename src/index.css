@@ -9,7 +9,7 @@
     --color-primary-disable-border: #C7C5C5;
 
     --color-secondary: #5687BB1F;
-    --color-secondary-border: #5687BB 2px;
+    --color-secondary-border: #5687BB;
     --color-secondary-hover: #007BA729;
     --color-secondary-hover-border: #007BA7 2px;
     --color-secondary-active: #0A4A6129;
@@ -37,9 +37,9 @@
     --color-white-text: #F0F4F3;
     --color-blue-text: #5687BB;
 
-    --color-input-background:#FAFAFA;
-    --color-input-border:#D1D1D1;
-    --color-input-border-active:#5687BB;
+    --color-input-background: #FAFAFA;
+    --color-input-border: #D1D1D1;
+    --color-input-border-active: #5687BB;
 
     --color-success-text: #27AE60;
     --color-success-secondary: #1DCB8C;
@@ -55,7 +55,7 @@
 
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
 }
 
@@ -79,9 +79,9 @@ p, span, input, button {
 
 .input {
     @apply text-paragraph-lg text-[#040405] focus:border-input-border-active
-        hover:border-input-border-active focus:outline-none bg-input-background w-[346px] h-[48px]
-        cursor-pointer rounded-[16px] border-2 border-input-border
-        flex justify-between py-[12px] px-[16px] leading-[24px]
+    hover:border-input-border-active focus:outline-none bg-input-background
+    cursor-pointer rounded-[16px] border-2 border-input-border
+    flex justify-between py-[12px] px-[16px] leading-[24px]
 }
 
 .background-light {

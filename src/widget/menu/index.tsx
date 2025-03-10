@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {useState} from "react";
+import ERouterPath from "@/shared/common/enum/router";
 
 const Menu = () => {
     const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -28,21 +29,21 @@ const Menu = () => {
                     <ul className="">
                         <li>
                             <Link
-                                to="/"
+                                to={ERouterPath.HOME_PAGE}
                                 className="">
                                 Home
                             </Link>
                         </li>
                         <li>
                             <Link
-                                to="/"
+                                to={ERouterPath.HOME_PAGE}
                                 className="">
                                 About
                             </Link>
                         </li>
                         <li>
                             <Link
-                                to="/"
+                                to={ERouterPath.HOME_PAGE}
                                 className="">
                                 Contact
                             </Link>

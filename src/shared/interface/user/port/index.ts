@@ -1,5 +1,5 @@
 import IUser from "@/shared/interface/user/enitites";
 
-interface IAuthPort extends IUser {}
+type IAuthPort = IUser &  {}
 
 export default IAuthPort

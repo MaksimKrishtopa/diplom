@@ -6,6 +6,7 @@ interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLIn
     type: string;
     name?: string;
     placeholder?: string;
+    className?: string;
     required: boolean;
     label: string;
 }
@@ -24,7 +25,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(({...props}, ref) => {
             <input
                 ref={ref} {...props}
                 type={isPasswordField && showPassword ? "text" : props.type}
-                className='input font-roboto font-normal'
+                className={`input font-roboto font-normal ${props.className}`}
                 required
             />
             {isPasswordField && (
@@ -33,8 +34,9 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(({...props}, ref) => {
                     onClick={toggleShowPassword}
                     className="absolute right-3.5 top-1/2 transform -translate-y-1/2.5 text-blue-text"
                 >
-                    {showPassword ? <img alt="иконка пароля" src={iconPasswordActive} className="icon-password"></img> :
-                        <img alt="иконка пароля" src={iconPasswordDefault}
+                    {showPassword ?
+                        <img alt="иконка пароля" src={iconPasswordDefault} className="icon-password"></img> :
+                        <img alt="иконка пароля" src={iconPasswordActive}
                              className="icon-password-passiv"></img>}
                 </button>
             )}

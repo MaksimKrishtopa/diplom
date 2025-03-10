@@ -5,7 +5,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({message, className}) => {
     if (!message) return null;
 
     return (
-        <span className={`text-warning ${className}`}>
+        <span className={`text-error ${className}`}>
             {message}
         </span>
     );

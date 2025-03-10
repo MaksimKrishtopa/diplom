@@ -1,11 +1,9 @@
 import Input from "@/shared/components/input";
-import {useUserStore} from "@/shared/lib/store/user";
 import useAuthAdminsPresenter from "@/entities/case/user/login/presenter";
 
 
 const AuthorizationForm = () => {
     const {handleSubmit,formState: {errors}, register,} = useAuthAdminsPresenter();
-    const {authMessage} = useUserStore();
 
     return (
         <div>
@@ -34,8 +32,6 @@ const AuthorizationForm = () => {
                     Войти
                 </button>
             </form>
-            {authMessage && <div
-                className="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3">{authMessage}</div>}
         </div>
     );
 };

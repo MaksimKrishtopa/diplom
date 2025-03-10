@@ -1,24 +1,23 @@
-import {createContext, ReactNode, useEffect, useState} from 'react';
+import {createContext, PropsWithChildren, useEffect, useState} from 'react';
 
 
-type User = {
+interface IUser  {
     id: string;
     email: string;
-    password: string;
-};
+}
 
-type UserContextType = {
-    user: User | null;
-    setUser: (user: User | null) => void;
+interface IUserContextType {
+    user: IUser | null;
+    setUser: (user: IUser | null) => void;
     authError: string | null;
     setAuthError: (error: string | null) => void;
     userToken: string | null;
     isAuthenticated: boolean;
     login: (token: string) => void;
     logout: () => void;
-};
+}
 
-export const UserContext = createContext<UserContextType>({
+export const UserAuthContext = createContext<IUserContextType>({
     user: null,
     setUser: () => {},
     authError: null,
@@ -27,11 +26,11 @@ export const UserContext = createContext<UserContextType>({
     userToken: null,
     login: () => {},
     logout: () => {},
-});
+})
 
 
-export const UserContextProvider = ({children}: { children: ReactNode }) => {
-    const [user, setUser] = useState<User | null>(null);
+const UserAuthContextProvider = ({children}: PropsWithChildren) => {
+    const [user, setUser] = useState<IUser | null>(null);
     const [authError, setAuthError] = useState<string | null>(null);
     const [userToken, setUserToken] =  useState<string | null>(localStorage.getItem('userToken') || null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!userToken);
@@ -52,7 +51,7 @@ export const UserContextProvider = ({children}: { children: ReactNode }) => {
         setAuthError(null);
     };
 
-    const contextValue: UserContextType = {
+    const contextValue: IUserContextType = {
         user,
         setUser,
         authError,
@@ -64,10 +63,13 @@ export const UserContextProvider = ({children}: { children: ReactNode }) => {
     };
 
     return (
-        <UserContext.Provider value={contextValue}>
+        <UserAuthContext.Provider value={contextValue}>
             {children}
-        </UserContext.Provider>
+        </UserAuthContext.Provider>
     );
 };
+
+
+export default UserAuthContextProvider
 
 

@@ -1,7 +1,7 @@
 import IUser from "@/shared/interface/user/enitites";
 
-interface IAdminDto extends IUser {
+interface IUserDto extends IUser {
     id: string;
 }
-export default IAdminDto
+export default IUserDto
 

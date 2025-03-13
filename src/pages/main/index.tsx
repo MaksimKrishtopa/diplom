@@ -1,13 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ERouterPath from '@/shared/common/enum/router';
 
 const MainPage: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="flex flex-col">
-            <h1 className="text-3xl font-bold underline">Hello!</h1>
-            <Link to="/recovery" className="text-[#5687BB] text-[16px] font-[400]">
+            <h1 className="text-title font-bold">Hello!</h1>
+            <button 
+                onClick={() => navigate(ERouterPath.RECOVERY)} 
+                className="text-primary text-[14px] font-normal cursor-pointer"
+            >
                 Забыли пароль?
-            </Link>
+            </button>
         </div>
     );
 };

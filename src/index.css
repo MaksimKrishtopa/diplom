@@ -58,6 +58,7 @@
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
+    color:#040405
 }
 
 
@@ -81,12 +82,12 @@ p, span, input, button {
 .input {
     @apply text-paragraph-lg text-[#040405] focus:border-input-border-active
     hover:border-input-border-active focus:outline-none bg-input-background
-    cursor-pointer rounded-[16px] border-2
+    cursor-pointer rounded-2xl border-2
     flex justify-between py-[12px] px-[16px] leading-[24px]
 }
 
 .background-light {
-    @apply p-[32px] rounded-[24px] bg-white-background
+    @apply p-8 rounded-[24px] bg-white-background
 }
 
 .background-blue {
@@ -94,6 +95,6 @@ p, span, input, button {
 }
 
 label {
-    @apply mb-[4px] text-[#040405] text-[14px] font-normal
+    @apply mb-1 text-[#040405] text-[14px] font-normal
 }
 

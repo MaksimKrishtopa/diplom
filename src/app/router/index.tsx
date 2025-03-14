@@ -1,9 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import {LazyMainPage} from "@/pages";
 import ERouterPath from "@/shared/common/enum/router";
-import AuthUserPage from "@/pages/auth";
-import HomePage from "@/pages/home";
-import {checkAuth} from "@/shared/check";
+import AuthUserPage from "@/pages/auth/index.tsx";
 
 const router = createBrowserRouter([
     {
@@ -14,10 +12,6 @@ const router = createBrowserRouter([
         element: <AuthUserPage/>,
         path: ERouterPath.LOGIN_PAGE,
     },
-    {
-        element: <HomePage/>,
-        path: ERouterPath.HOME_PAGE,
-        loader:checkAuth
-    }
+
 ])
 export default router

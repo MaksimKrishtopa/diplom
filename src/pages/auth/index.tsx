@@ -1,11 +1,18 @@
-import {ReactNode} from 'react';
-import AuthorizationFormUser from "@/features/auth/form/user/authorization";
+import React,{ReactNode} from 'react';
+import {formContainerStyles, pageContainerAuthStyles} from "@/pages/auth/index.ts";
+import BackgroundLogin from "@/widget/background-login";
+import AuthorizationFormUser from "@/features/auth/form/user";
 
-const AuthUserPage = (): ReactNode => {
+const AuthUserPage:React.FC = (): ReactNode => {
 
     return (
-        <div className="min-h-screen flex bg-[#D5E7FB] justify-center items-center">
-            <AuthorizationFormUser/>
+        <div className={pageContainerAuthStyles()}>
+            <div className={formContainerStyles()}>
+                <BackgroundLogin/>
+                <div className="flex">
+                    <AuthorizationFormUser/>
+                </div>
+            </div>
         </div>
     );
 };

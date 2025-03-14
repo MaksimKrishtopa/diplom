@@ -1,5 +1,5 @@
-enum EAdminUseCaseKeys {
-    keyAuth = "admin-authorization",
+enum EMutationValues {
+    KEY_AUTH = 'USER_AUTHORIZATION',
 }
 
-export default EAdminUseCaseKeys
+export default EMutationValues

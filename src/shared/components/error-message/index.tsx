@@ -1,4 +1,4 @@
-import {ErrorMessageProps} from "@/shared/lib/validation/user";
+import {ErrorMessageProps} from "@/shared/interface/user/validation";
 import React from "react";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({message, className}) => {

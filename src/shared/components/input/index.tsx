@@ -1,46 +1,21 @@
-import React, {forwardRef, InputHTMLAttributes, useState} from 'react';
-import {iconPasswordActive, iconPasswordDefault} from "@/shared/icon";
-
+import React, { forwardRef, InputHTMLAttributes } from 'react';
+import {makeClassname} from "@/shared/utils/functions/classname";
+import {inputStyles} from "@/shared/components/input/style.ts";
 
 interface IInputProps extends React.DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-    type: string;
-    name?: string;
-    placeholder?: string;
-    className?: string;
-    required: boolean;
     label: string;
-    validationError?: boolean;
+    error?: boolean;
 }
 
-
-const Input = forwardRef<HTMLInputElement, IInputProps>(({validationError, ...props}, ref) => {
-    const [showPassword, setShowPassword] = useState(false)
-    const toggleShowPassword = () => setShowPassword((showPassword) => !showPassword);
-    const isPasswordField = props.type === "password";
+const Input = forwardRef<HTMLInputElement, IInputProps>(({ error, label, className, ...props }, ref) => {
     return (
         <div className="relative">
-            <label
-                className="cursor-pointer font-roboto ">
-                {props.label}
-            </label>
+            {label && <label className="cursor-pointer font-roboto">{label}</label>}
             <input
-                ref={ref} {...props}
-                type={isPasswordField && showPassword ? "text" : props.type}
-                className={`input font-roboto font-normal ${validationError ? "border-input-border-error": 'border-input-border'} ${props.className}`}
-                required
+                ref={ref}
+                {...props}
+                className={makeClassname(inputStyles({ error }), className)}
             />
-            {isPasswordField && (
-                <button
-                    type="button"
-                    onClick={toggleShowPassword}
-                    className="absolute right-3.5 top-1/2 transform -translate-y-1/2.5 text-blue-text"
-                >
-                    {showPassword ?
-                        <img alt="иконка пароля" src={iconPasswordDefault} className="icon-password"></img> :
-                        <img alt="иконка пароля" src={iconPasswordActive}
-                             className="icon-password-passiv"></img>}
-                </button>
-            )}
         </div>
     );
 });

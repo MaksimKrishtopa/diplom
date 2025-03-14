@@ -4,7 +4,7 @@ import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {RouterProvider} from "react-router-dom";
 import router from "@/app/router";
 import ErrorBoundaryProvider from "@/app/provider/error-boundary";
-import UserContextProvider from "@/shared/hook";
+import UserContextProvider from "@/app/provider/context";
 
 const client = new QueryClient({
     defaultOptions: {

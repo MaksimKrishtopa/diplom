@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { LazyMainPage, LazyEmailInput, LazyEmailConfirmation } from "@/pages";
+import { LazyMainPage, LazyEmailInput, LazyEmailConfirmation, LazyNewPassword } from "@/pages";
 import ERouterPath from "@/shared/common/enum/router";
 
 const router = createBrowserRouter([
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
     {
         element: <LazyEmailConfirmation />,
         path: ERouterPath.RECOVERY_CONFIRMATION
+    },
+    {
+        element: <LazyNewPassword />,
+        path: ERouterPath.RECOVERY_NEW_PASSWORD
     }
 ]);
 

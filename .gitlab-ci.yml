@@ -1,34 +1,30 @@
+include:
+  - project: "trainee/ci-cd"
+    ref: dev
+    file: "builds.yml"
+  - project: "trainee/ci-cd"
+    ref: dev
+    file: "deploy-front.yml"
+
 stages:
   - build
-#  - deploy
-#  - trigger
+  - deploy-dev
 
-build-image:
-  stage: build
-  tags:
-    - frontend
+build:
+  extends: .build-app
   only:
     - dev
-#    - prod
-#    - stage
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
-  script:
-    - mkdir -p /kaniko/.docker
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)\"}}}" >
-      /kaniko/.docker/config.json
-    - /kaniko/executor
-      --context $CI_PROJECT_DIR
-      --dockerfile $CI_PROJECT_DIR/Dockerfile
-      --destination $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
+  variables:
+    RUNNER_TAGS: front-common
 
-#trigger-downstream:
-#  stage: trigger
-#  only:
-#    - dev
-#    - stage
-#    - prod
-#  trigger:
-#    project: corp_platform/ci-cd
-#    branch: $CI_COMMIT_REF_NAME
+deploy-dev:
+  extends: .deploy-front
+  only:
+    - dev
+  variables:
+    RUNNER_TAGS: front-common
+    SERVER_KEY: $TRAINEE_DEV_KEY
+    SERVER_IP: $TRAINEE_DEV_IP
+    CONTAINER_NAME: travelers-blog-front
+    PUBLISHED_PORT: 20031
+    INTERNAL_PORT: 80

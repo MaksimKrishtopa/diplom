@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '@/shared/components/input';
 import Logo from '@/assets/icons/logo';
@@ -8,6 +8,7 @@ import { debounce } from 'lodash';
 
 const RecoveryEmailConfirmation: React.FC = () => {
   const { handleSubmit, register, setValue } = useForm();
+  const inputRefs = useRef<HTMLInputElement[]>([]);
 
   const debouncedSetValue = useMemo(
     () => debounce((name: string, value: string) => setValue(name, value), 300),
@@ -15,6 +16,19 @@ const RecoveryEmailConfirmation: React.FC = () => {
   );
 
   const handleFormSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const { value } = e.target;
+    if (/^\d$/.test(value)) {
+      debouncedSetValue(`code-${index}`, value);
+      if (index < 5) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    } else {
+      e.target.value = '';
+    }
   };
 
   return (
@@ -31,16 +45,21 @@ const RecoveryEmailConfirmation: React.FC = () => {
         <p className="text-[#040405]-normal mb-8">Введите код из письма</p>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="flex justify-between mb-8 gap-2">
-            {[...Array(6)].map((_, i) => (
+            {Array.from({ length: 6 }, (_, value) => (
               <Input
-                key={i}
+                key={value}
                 type="text"
                 placeholder=""
                 className="w-12 h-12 text-center border-2 rounded-xl bg-[#FAFAFA] border-[#D1D1D1] focus:border-input-border-active focus:outline-none hover:border-input-border-active"
                 required
                 label=""
-                {...register(`code-${i}`)}
-                onChange={(e) => debouncedSetValue(`code-${i}`, e.target.value)}
+                {...register(`code-${value}`)}
+                onInput={(e) => handleInput(e as React.ChangeEvent<HTMLInputElement>, value)}
+                ref={(el) => {
+                  if (el) inputRefs.current[value] = el;
+                }}
+                maxLength={1}
+                pattern="[0-9]"
               />
             ))}
           </div>
@@ -52,9 +71,9 @@ const RecoveryEmailConfirmation: React.FC = () => {
           </Button>
           <div className="flex justify-center mt-4">
             <button className="text-blue-500 cursor-pointer">
-                Отправить код повторно
+              Отправить код повторно
             </button>
-            </div>
+          </div>
         </form>
       </div>
     </div>

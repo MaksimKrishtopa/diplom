@@ -1,5 +1,5 @@
 import IAuthPort from "../port";
 
-interface IUserForm extends IAuthPort {}
+type IUserForm = IAuthPort
 
 export default IUserForm;

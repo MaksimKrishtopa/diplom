@@ -41,6 +41,7 @@
     --color-input-border: #D1D1D1;
     --color-input-border-error: #EB5757;
     --color-input-border-active: #5687BB;
+    --color-input-text: #040405;
 
     --color-success-text: #27AE60;
     --color-success-secondary: #1DCB8C;
@@ -66,33 +67,6 @@ p, span, input, button {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
-.text-warning {
-    @apply text-[14px] leading-[19.6px] text-[#E2B93B]
-}
-
-.text-error {
-    @apply text-[14px] leading-[19.6px] text-[#EB5757]
-}
-
-.text-success {
-    @apply text-[14px] leading-[19.6px] text-[#27AE60]
-}
-
-.input {
-    @apply text-paragraph-lg text-[#040405] focus:border-input-border-active
-    hover:border-input-border-active focus:outline-none bg-input-background
-    cursor-pointer rounded-2xl border-2
-    flex justify-between py-[12px] px-[16px] leading-[24px]
-}
-
-.background-light {
-    @apply p-8 rounded-[24px] bg-white-background
-}
-
-.background-blue {
-    @apply w-[406px] h-[770px] rounded-e-[40px] bg-blue-background
-}
 
 label {
     @apply mb-1 text-[#040405] text-[14px] font-normal

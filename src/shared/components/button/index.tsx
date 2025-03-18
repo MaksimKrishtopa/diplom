@@ -13,7 +13,7 @@ const Button = ({
                 }: IStyledButtonProps): React.ReactNode => {
     return (
         <button
-            className={makeClassname(buttonStyles({ styleType }), className)}
+            className={makeClassname(buttonStyles(styleType), className)}
             {...props}
         >
             {props.children}

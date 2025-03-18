@@ -1,31 +1,28 @@
-import Input from "@/shared/components/input";
-import useAuthAdminsPresenter from "@/entities/case/user/login/presenter";
+import Input from "../../../../shared/components/inputs/input";
 import ErrorMessage from "@/shared/components/error-message";
 import Button from "@/shared/components/button";
-import React from "react";
-import InputPassword from "@/shared/components/password-input";
-import {
-    buttonContainerStyles,
-    forgotPasswordStyles,
-    inputFieldStyles
-} from "@/features/auth/form/user/style.ts";
-import LogoForm from "../../../../widget/logo-login";
+import {ReactNode} from "react";
+import InputPassword from "../../../../shared/components/inputs/password-input";
+import {formStyles} from "@/features/auth/form/user/style.ts";
+import LogoForm from "@/widget/logo-login";
+import useAuthUserPresenter from "@/entities/case/user/login/presenter";
 
 
-const AuthorizationFormUser: React.FC = () => {
-    const {handleSubmit, formState: {errors}, register} = useAuthAdminsPresenter();
+
+const AuthorizationFormUser = ():ReactNode => {
+    const {handleSubmit, errors, register} = useAuthUserPresenter();
 
     return (
-        <form noValidate className="flex flex-col items-start gap-8"
+        <form noValidate className={formStyles.formContainerStyles}
               onSubmit={handleSubmit}>
             <LogoForm/>
-            <div className='flex items-start flex-col gap-[25px]'>
-                <div className={inputFieldStyles()}>
+            <div className={formStyles.formGapStyles}>
+                <div className={formStyles.input}>
                     <Input
                         type={'email'}
                         required={true}
                         label={'E-mail'}
-                        className={'w-[346px] h-12'}
+                        className={formStyles.sizeInputStyles}
                         placeholder={'Введите e-mail'}
                         error={!!errors.email}
                         max={255}
@@ -33,33 +30,32 @@ const AuthorizationFormUser: React.FC = () => {
                     />
                     <ErrorMessage message={errors.email?.message}/>
                 </div>
-                <div className={inputFieldStyles()}>
+                <div className={formStyles.input}>
                     <InputPassword
                         type={'password'}
                         required={true}
                         label={'Пароль'}
-                        className={'w-[346px] h-12'}
+                        className={formStyles.sizeInputStyles}
                         placeholder={'Введите пароль'}
                         error={!!errors.password}
                         max={100}
                         {...register('password')}
                     />
                     <ErrorMessage message={errors.password?.message}/>
-                    <div className="w-full flex justify-end">
-                        <p className={forgotPasswordStyles()}>
+                    <div className={formStyles.formContainerInfoPasswordStyles}>
+                        <p className={formStyles.forgotPasswordStyles}>
                             Забыли пароль?
                         </p>
                     </div>
                 </div>
-                <div className={buttonContainerStyles()}>
+                <div className={formStyles.buttonContainerStyles}>
                     <Button type='submit'>Войти</Button>
                     <Button styleType='secondary' type='button'>Создать аккаунт</Button>
                 </div>
                 <ErrorMessage message={errors.root?.message}/>
             </div>
         </form>
-    )
-        ;
+    );
 };
 
 export default AuthorizationFormUser;

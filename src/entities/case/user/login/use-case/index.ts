@@ -1,14 +1,14 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import IUserDto from "@/shared/interface/user/dto/type.ts";
-import {getAuthorizeAdminRepository} from "@/entities/repository/user";
+import IUserDto from "@/shared/interface/enitites/user/dto/type.ts";
+import {getAuthorizeUserRepository} from "@/entities/repository/user/login";
 import EMutationValues from "@/shared/enum/mutation-key";
-import IAuthPort from "@/shared/interface/user/port";
+import IAuthPort from "../../../../../shared/interface/enitites/user/port";
 
 
 
-const useAuthAdminsUseCase = ():UseMutationResult<IUserDto, Error, IAuthPort> => {
+const useAuthUserUseCase = ():UseMutationResult<IUserDto, Error, IAuthPort> => {
     const execute = async (port: IAuthPort) => {
-        return getAuthorizeAdminRepository(port);
+        return getAuthorizeUserRepository(port);
     };
 
     return useMutation({
@@ -18,4 +18,4 @@ const useAuthAdminsUseCase = ():UseMutationResult<IUserDto, Error, IAuthPort> =>
 };
 
 
-export default useAuthAdminsUseCase;
+export default useAuthUserUseCase;

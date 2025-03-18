@@ -1,8 +1,8 @@
-import React from "react";
-import IIconProps from "@/shared/interface/user/input";
+import {ReactNode} from "react";
+import IIconProps from "../../../../interface/ui/input";
 
 
-const IconPasswordPassive: React.FC<IIconProps> = (props) => {
+const IconPasswordPassive = (props:IIconProps):ReactNode => {
     return (
         <svg {...props}
               viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

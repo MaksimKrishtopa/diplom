@@ -1,15 +1,15 @@
-import React,{ReactNode} from 'react';
-import {formContainerStyles, pageContainerAuthStyles} from "@/pages/auth/index.ts";
+import {ReactNode} from 'react';
+import {formContainer} from "@/pages/auth/style";
 import BackgroundLogin from "@/widget/background-login";
 import AuthorizationFormUser from "@/features/auth/form/user";
 
-const AuthUserPage:React.FC = (): ReactNode => {
+const AuthUserPage = (): ReactNode => {
 
     return (
-        <div className={pageContainerAuthStyles()}>
-            <div className={formContainerStyles()}>
+        <div className={formContainer.pageContainerAuthStyles}>
+            <div className={formContainer.formContainerStyles}>
                 <BackgroundLogin/>
-                <div className="flex">
+                <div className={formContainer.ContainerAuthStyles}>
                     <AuthorizationFormUser/>
                 </div>
             </div>

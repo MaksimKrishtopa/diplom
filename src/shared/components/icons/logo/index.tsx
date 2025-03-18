@@ -1,13 +1,13 @@
-import React from 'react';
+import {ReactNode} from 'react';
 
 interface ILogoProps {
     width: string;
     height: string;
 }
 
-const Logo: React.FC<ILogoProps> = ({...props}) => {
+const Logo = (props:ILogoProps):ReactNode => {
     return (
-        <svg width={props.width} height={props.height} viewBox="0 0 77 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg {...props} viewBox="0 0 77 79" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M37 15.0032C36.4592 16.313 35.895 17.5719 35.4211 18.8647C35.1951 19.4797 34.8602 19.7424 34.2257 19.8915C30.4836 20.7641 27.1869 22.533 24.3656 25.1711C23.2589 26.2064 22.3916 27.4535 21.593 28.7429C20.0861 31.1777 19.0798 33.8108 18.5742 36.6387C18.5457 36.7963 18.4754 36.8606 18.3331 36.8979C16.9685 37.2537 15.604 37.6062 14.2461 37.9772C14.0084 38.0416 13.9933 37.9688 14.0017 37.7671C14.159 33.7803 15.2072 30.0492 17.3402 26.6927C19.9019 22.6635 23.2254 19.4272 27.5 17.2787C30.3848 15.8284 33.4538 15.093 36.6735 15.0015C36.7689 14.9981 36.8661 15.0015 36.9983 15.0015L37 15.0032Z"
                 fill="#42694A"/>

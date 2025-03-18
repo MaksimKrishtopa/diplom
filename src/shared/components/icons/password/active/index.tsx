@@ -1,7 +1,7 @@
-import React from "react";
-import IIconProps from "@/shared/interface/user/input";
+import {ReactNode} from "react";
+import IIconProps from "../../../../interface/ui/input";
 
-const IconPasswordActive: React.FC<IIconProps> = (props) => {
+const IconPasswordActive= (props: IIconProps): ReactNode => {
     return (
         <svg
             {...props}

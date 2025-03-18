@@ -1,12 +1,13 @@
-import React from 'react';
+import {ReactNode} from 'react';
 import logo from '@/assets/logo.svg'
+import {logoContainerStyles, paragraphStyles} from "@/widget/logo-login/style.ts";
 
 
-const LogoForm:React.FC = () => {
+const LogoForm = (): ReactNode => {
     return (
-        <div className="flex flex-col gap-40 items-start">
+        <div className={logoContainerStyles()}>
             <img alt="фон" src={logo}></img>
-            <h4 className="justify-center font-bold text-title tracking-normal">
+            <h4 className={paragraphStyles()}>
                 Вход в систему
             </h4>
         </div>

@@ -11,7 +11,7 @@ stages:
   - deploy-dev
 
 build:
-  extends: .build-app
+  extends: .build-app-by-branch
   only:
     - dev
   variables:

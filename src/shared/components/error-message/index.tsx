@@ -1,7 +1,8 @@
-import {ErrorMessageProps} from "../../interface/ui/validation";
+
 import {ReactNode} from "react";
 import clsx from "clsx";
 import {messageError} from "@/shared/components/error-message/style.ts";
+import {ErrorMessageProps} from "@/shared/interface/ui/validation";
 
 const ErrorMessage = ({ message, className }: ErrorMessageProps): ReactNode => {
     if (!message) return null;

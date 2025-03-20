@@ -1,11 +1,7 @@
 import {ReactNode} from 'react';
+import IIconProps from "@/shared/interface/ui/icon";
 
-interface ILogoProps {
-    width: string;
-    height: string;
-}
-
-const Logo = (props:ILogoProps):ReactNode => {
+const Logo = (props:IIconProps):ReactNode => {
     return (
         <svg {...props} viewBox="0 0 77 79" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

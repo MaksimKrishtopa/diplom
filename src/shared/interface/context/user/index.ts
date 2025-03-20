@@ -1,18 +1,15 @@
-interface IUser  {
-    id: string;
-    email: string;
-}
-
+import {IUserDto} from "@/shared/interface/enitites/user/dto/type.ts";
 
 interface IUserContextType {
-    user: IUser | null;
-    setUser: (user: IUser | null) => void;
+    user: IUserDto | null;
+    setUser: (user: IUserDto | null) => void;
     authError: string | null;
     setAuthError: (error: string | null) => void;
     userToken: string  | null;
+    userId: string | null;
     isAuthenticated: boolean;
-    login: (token:string) => void;
+    login: (data:IUserDto) => void;
     logout: () => void;
 }
 
-export type {IUser,IUserContextType}
+export type {IUserContextType}

@@ -1,8 +1,8 @@
 import {useMutation, UseMutationResult} from "@tanstack/react-query";
-import IUserDto from "@/shared/interface/enitites/user/dto/type.ts";
 import {getAuthorizeUserRepository} from "@/entities/repository/user/login";
 import EMutationValues from "@/shared/enum/mutation-key";
-import IAuthPort from "../../../../../shared/interface/enitites/user/port";
+import {IAuthPort} from "@/shared/interface/enitites/user/port";
+import {IUserDto} from "@/shared/interface/enitites/user/dto/type.ts";
 
 
 

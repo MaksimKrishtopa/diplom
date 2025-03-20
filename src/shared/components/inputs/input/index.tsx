@@ -1,22 +1,17 @@
-import {DetailedHTMLProps, forwardRef, InputHTMLAttributes} from 'react';
+import {forwardRef} from 'react';
 import {makeClassname} from "@/shared/utils/functions/classname";
-import {containerPasswordStyles,inputS, labelPasswordStyles} from "@/shared/components/inputs/style.ts";
+import {input, inputStyles,} from "@/shared/components/inputs/style.ts";
+import IInputProps from "@/shared/interface/ui/input";
 
 
-
-interface IInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-    label: string;
-    error?: boolean;
-}
-
-const Input = forwardRef<HTMLInputElement, IInputProps>(({ error, label, className, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, IInputProps>(({error, label, className, ...props}, ref) => {
     return (
-        <div className={containerPasswordStyles()}>
-            {label && <label className={labelPasswordStyles()}>{label}</label>}
+        <div className={input.containerPasswordStyles}>
+            {label && <label className={input.labelPasswordStyles}>{label}</label>}
             <input
                 ref={ref}
                 {...props}
-                className={makeClassname(inputS.input, className)}
+                className={makeClassname(inputStyles({error}), className)}
             />
         </div>
     );

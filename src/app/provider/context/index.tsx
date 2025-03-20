@@ -1,6 +1,6 @@
 import {createContext, PropsWithChildren} from 'react';
 import {IUserContextType} from "@/shared/interface/context/user";
-import {useAuth} from "@/shared/hook/context";
+import {useAuth} from "@/shared/context/auth";
 
 
 export const UserAuthContext = createContext<IUserContextType>({
@@ -9,6 +9,7 @@ export const UserAuthContext = createContext<IUserContextType>({
     authError: null,
     setAuthError: () => {},
     userToken: null,
+    userId: null,
     isAuthenticated: false,
     login: () => {},
     logout: () => {},

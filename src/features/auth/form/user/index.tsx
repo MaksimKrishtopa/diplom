@@ -1,11 +1,11 @@
-import Input from "../../../../shared/components/inputs/input";
 import ErrorMessage from "@/shared/components/error-message";
 import Button from "@/shared/components/button";
 import {ReactNode} from "react";
-import InputPassword from "../../../../shared/components/inputs/password-input";
 import {formStyles} from "@/features/auth/form/user/style.ts";
 import LogoForm from "@/widget/logo-login";
 import useAuthUserPresenter from "@/entities/case/user/login/presenter";
+import Input from "@/shared/components/inputs/input";
+import InputPassword from "@/shared/components/inputs/password-input";
 
 
 
@@ -50,7 +50,7 @@ const AuthorizationFormUser = ():ReactNode => {
                 </div>
                 <div className={formStyles.buttonContainerStyles}>
                     <Button type='submit'>Войти</Button>
-                    <Button styleType='secondary' type='button'>Создать аккаунт</Button>
+                    <Button variant='secondary' type='button'>Создать аккаунт</Button>
                 </div>
                 <ErrorMessage message={errors.root?.message}/>
             </div>

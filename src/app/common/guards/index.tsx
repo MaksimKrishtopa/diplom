@@ -1,17 +1,4 @@
-import {useContext} from "react";
-import {UserAuthContext} from "@/app/provider/context";
-import {Navigate,Outlet} from "react-router-dom";
-
-
-interface IGuardProps {
-    navigateToFail?: string
-}
-
-const AuthGuard = ({navigateToFail = '/'}: IGuardProps) => {
-    const {isAuthenticated} = useContext(UserAuthContext)
-    if (isAuthenticated) return <Outlet />
-    return <Navigate to={navigateToFail}/>
-}
+import {AuthGuard} from "@/app/common/guards/auth-guard";
 
 const GUARDS = {
     AuthGuard

@@ -15,18 +15,9 @@ const inputStyles = cva(
     }
 );
 
-const inputS = {
-    input: 'border-input-border text-paragraph-lg text-input-text focus:border-input-border-active hover:border-input-border-active focus:outline-none bg-input-background cursor-pointer rounded-2xl border-2 flex justify-between py-3 px-4 leading-6 font-roboto font-normal'
+const input = {
+    labelPasswordStyles: "cursor-pointer font-roboto",
+    containerPasswordStyles: "relative"
 }
 
-
-
-const labelPasswordStyles = cva(
-    "cursor-pointer font-roboto"
-)
-
-const containerPasswordStyles = cva(
-    "relative"
-)
-
-export {labelPasswordStyles, inputStyles,inputS,containerPasswordStyles}
+export {inputStyles, input}

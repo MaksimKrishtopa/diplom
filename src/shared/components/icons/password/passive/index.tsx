@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import IIconProps from "../../../../interface/ui/input";
+import IIconProps from "@/shared/interface/ui/icon";
 
 
 const IconPasswordPassive = (props:IIconProps):ReactNode => {

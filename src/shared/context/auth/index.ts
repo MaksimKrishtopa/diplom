@@ -1,36 +1,42 @@
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
-import {IUser} from "@/shared/interface/context/user";
+import {IUserDto} from "@/shared/interface/enitites/user/dto/type.ts";
 
 interface useAuthReturn {
-    user: IUser | null,
-    setUser: Dispatch<SetStateAction<IUser | null>>,
+    user: IUserDto | null,
+    setUser: Dispatch<SetStateAction<IUserDto | null>>,
     authError: string | null,
     setAuthError: Dispatch<SetStateAction<string | null>>,
     userToken: string | null,
     isAuthenticated: boolean,
-    login: (token: string) => void,
+    userId: string | null,
+    login: (data:IUserDto) => void,
     logout: () => void,
 }
 
 const useAuth = ():useAuthReturn => {
-    const [user, setUser] = useState<IUser | null>(null);
+    const [user, setUser] = useState<IUserDto | null>(null);
     const [authError, setAuthError] = useState<string | null>(null);
     const [userToken, setUserToken] = useState<string | null>(localStorage.getItem('token'));
+    const [userId, setUserId] = useState<string | null>(localStorage.getItem('id'))
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!userToken);
 
     useEffect(() => {
         setIsAuthenticated(!!userToken);
     }, [userToken]);
 
-    const login = (token: string) => {
-        localStorage.setItem('token', token);
-        setUserToken(token);
+    const login = (data:IUserDto) => {
+        localStorage.setItem('token', data.accessToken)
+        localStorage.setItem('id', data.id)
+        setUserToken(data.accessToken);
+        setUserId(data.id);
     };
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('id');
         setUserToken(null);
         setUser(null);
+        setUserId(null);
         setAuthError(null);
     };
 
@@ -40,6 +46,7 @@ const useAuth = ():useAuthReturn => {
         authError,
         setAuthError,
         userToken,
+        userId,
         isAuthenticated,
         login,
         logout,

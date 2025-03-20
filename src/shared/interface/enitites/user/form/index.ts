@@ -1,4 +1,4 @@
-import IAuthPort from "../port";
+import {IAuthPort} from "@/shared/interface/enitites/user/port";
 
 type IUserForm = IAuthPort
 

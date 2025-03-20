@@ -1,22 +1,19 @@
-import React from 'react';
+import {ButtonHTMLAttributes, DetailedHTMLProps, ReactNode} from 'react';
 import {buttonStyles} from "@/shared/components/button/style.ts";
 import {makeClassname} from "@/shared/utils/functions/classname";
+import {VariantProps} from "class-variance-authority";
 
-type IStyledButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    styleType?: 'primary' | 'secondary' | 'selective';
-};
+type IStyledButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+    & VariantProps<typeof buttonStyles>
 
 const Button = ({
-                    styleType = 'primary',
+                    variant,
                     className,
-                    ...props
-                }: IStyledButtonProps): React.ReactNode => {
+                    children,
+                }: IStyledButtonProps): ReactNode => {
     return (
-        <button
-            className={makeClassname(buttonStyles(styleType), className)}
-            {...props}
-        >
-            {props.children}
+        <button className={makeClassname(buttonStyles({variant}), className)} >
+            {children}
         </button>
     );
 };

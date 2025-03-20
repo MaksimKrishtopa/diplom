@@ -1,2 +1,3 @@
-export const DEFAULT_URL = 'http://sdeix.site';
-// export const API_TOKEN = '';
+const DEFAULT_URL = 'http://sdeix.site';
+
+export {DEFAULT_URL}

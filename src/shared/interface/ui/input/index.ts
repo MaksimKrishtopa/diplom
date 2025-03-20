@@ -1,8 +1,8 @@
-import {SVGProps} from "react";
+import {DetailedHTMLProps, InputHTMLAttributes} from "react";
 
-interface IIconProps extends SVGProps<SVGSVGElement> {
-    width: string;
-    height: string;
+interface IInputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+    label: string;
+    error?: boolean;
 }
 
-export default IIconProps;
+export default IInputProps

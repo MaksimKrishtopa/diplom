@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
-import Input from '@/shared/components/input';
-import Logo from '@/assets/icons/logo';
+import Input from '@/shared/components/inputs/input';
+import Logo from '@/shared/components/icons/logo';
 import Button from '@/shared/components/button';
 
-const RecoveryEmailInput: React.FC = () => {
+const RecoveryEmailInput = (): ReactNode => {
   const { handleSubmit, register } = useForm();
 
   const handleFormSubmit = (data: any) => {
@@ -13,7 +13,7 @@ const RecoveryEmailInput: React.FC = () => {
 
   return (
     <div className="flex flex-col items-start w-[346px] h-full justify-between">
-      <Logo />
+      <Logo width={'179px'} height={'60px'} />
       <div className="flex flex-col w-full">
         <h2 className="text-title font-extrabold text-[#040405] font-poppins mb-8">
           Забыли пароль?
@@ -29,8 +29,9 @@ const RecoveryEmailInput: React.FC = () => {
             {...register("email")}
           />
           <Button
-            type="primary"
-            className="w-full h-12 bg-primary text-white rounded-xl py-3 text-center cursor-pointer">
+            type="submit"
+            className="w-full h-12 bg-primary text-white rounded-xl py-3 text-center cursor-pointer"
+          >
             Продолжить
           </Button>
         </form>

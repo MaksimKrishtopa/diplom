@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
-import Input from '@/shared/components/input';
-import Logo from '@/assets/icons/logo';
+import Input from '@/shared/components/inputs/input';
+import Logo from '@/shared/components/icons/logo';
 import Button from '@/shared/components/button';
 import BackButton from '@/shared/components/back-button';
 
-const PasswordForm: React.FC = () => {
+const PasswordForm = (): ReactNode => {
   const { handleSubmit, register } = useForm();
 
   const handleFormSubmit = (data: any) => {
-    console.log(data);  // Обработка данных формы
+    console.log(data);
   };
 
   return (
     <div className="flex flex-col items-start w-[346px] h-full justify-between">
       <div>
         <BackButton />
-        <Logo />
+        <Logo width={'179px'} height={'60px'} />
       </div>
 
       <div className="flex flex-col w-full">
@@ -43,7 +43,7 @@ const PasswordForm: React.FC = () => {
             {...register("confirm-password")}
           />
           <Button
-            type="primary"
+            type="submit"
             className="w-full h-12 bg-primary text-white rounded-xl py-3 text-center cursor-pointer"
           >
             Продолжить

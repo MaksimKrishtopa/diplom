@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ERouterPath from '@/shared/common/enum/router';
-import BackArrow from '@/assets/icons/back-arrow';
+import BackArrow from '@/shared/components/icons/back-arrow';
 
 interface IBackButtonProps {
   to?: ERouterPath;
@@ -9,7 +9,7 @@ interface IBackButtonProps {
   className?: string;
 }
 
-const BackButton: React.FC<IBackButtonProps> = ({ to = ERouterPath.MAIN_PAGE, label = 'Вернуться назад', className }) => {
+const BackButton = ({ to = ERouterPath.MAIN_PAGE, label = 'Вернуться назад', className }: IBackButtonProps): ReactNode => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -22,7 +22,7 @@ const BackButton: React.FC<IBackButtonProps> = ({ to = ERouterPath.MAIN_PAGE, la
 
   return (
     <button onClick={handleNavigate} className={`flex items-center text-blue-500 text-sm font-medium mb-6 cursor-pointer ${className}`}>
-      <BackArrow className="mr-2" />
+      <BackArrow width={12} height={12} className="mr-2" />
       {label}
     </button>
   );

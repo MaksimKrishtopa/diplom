@@ -1,12 +1,12 @@
-import React, { useMemo, useRef } from 'react';
+import React, { ReactNode, useMemo, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import Input from '@/shared/components/input';
-import Logo from '@/assets/icons/logo';
+import Input from '@/shared/components/inputs/input';
+import Logo from '@/shared/components/icons/logo';
 import Button from '@/shared/components/button';
 import BackButton from '@/shared/components/back-button';
 import { debounce } from 'lodash';
 
-const RecoveryEmailConfirmation: React.FC = () => {
+const RecoveryEmailConfirmation = (): ReactNode => {
   const { handleSubmit, register, setValue } = useForm();
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -35,7 +35,7 @@ const RecoveryEmailConfirmation: React.FC = () => {
     <div className="flex flex-col items-start w-[346px] h-full justify-between">
       <div>
         <BackButton />
-        <Logo />
+        <Logo width={'179px'} height={'60px'} />
       </div>
 
       <div className="flex flex-col w-full">
@@ -64,7 +64,7 @@ const RecoveryEmailConfirmation: React.FC = () => {
             ))}
           </div>
           <Button
-            type="primary"
+            type="submit"
             className="w-full h-12 bg-primary text-white rounded-xl py-3 text-center cursor-pointer"
           >
             Отправить

@@ -1,21 +1,19 @@
-import React from 'react';
+import {ButtonHTMLAttributes, DetailedHTMLProps, ReactNode} from 'react';
+import {buttonStyles} from "@/shared/components/button/style.ts";
+import {makeClassname} from "@/shared/utils/functions/classname";
+import {VariantProps} from "class-variance-authority";
 
-enum EButtonProps {
-    primary = "primary",
-    secondary = "secondary",
-    danger = "danger"
-}
+type IStyledButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+    & VariantProps<typeof buttonStyles>
 
-interface IButtonProps extends Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'> {
-    type?: `${EButtonProps}`;
-
-}
-
-const Button: React.FC<IButtonProps> = ({ type = EButtonProps.primary, ...rest }) =>
-{
+const Button = ({
+                    variant,
+                    className,
+                    children,
+                }: IStyledButtonProps): ReactNode => {
     return (
-        <button {...rest}>
-            {rest.children}
+        <button className={makeClassname(buttonStyles({variant}), className)} >
+            {children}
         </button>
     );
 };

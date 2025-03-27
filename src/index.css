@@ -33,6 +33,7 @@
 
     --color-blue: #5687BB;
     --color-white: #F0F4F3;
+    --color-light-blue: #D5E7FB;
 
     --color-white-text: #F0F4F3;
     --color-blue-text: #5687BB;
@@ -44,6 +45,7 @@
 
     --color-success-text: #27AE60;
     --color-success-secondary: #1DCB8C;
+    --color-black-text: #040405;
 
     --color-error-text: #EB5757;
     --color-warning-text: #E2B93B;
@@ -53,6 +55,7 @@
     --text-paragraph-sm: 12px;
     --text-paragraph-xs: 10px;
     --shadow-3xl: 10px 10px 6px rgba(0, 0, 0, 0.25);
+    
 
 }
 

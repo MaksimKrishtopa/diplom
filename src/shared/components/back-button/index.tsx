@@ -12,13 +12,7 @@ interface IBackButtonProps {
 const BackButton = ({ to = ERouterPath.MAIN_PAGE, label = 'Вернуться назад', className }: IBackButtonProps): ReactNode => {
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    if (window.history.length > 1) {
-      navigate(-1);
-    } else {
-      navigate(to);
-    }
-  };
+  const handleNavigate = () => window.history.length > 1 ? navigate(-1) : navigate(to);
 
   return (
     <button onClick={handleNavigate} className={`flex items-center text-blue-500 text-sm font-medium mb-6 cursor-pointer ${className}`}>

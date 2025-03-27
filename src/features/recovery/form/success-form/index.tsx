@@ -1,14 +1,13 @@
 import React, { ReactNode } from 'react';
 import Logo from '@/shared/components/icons/logo';
+import styles from '@/features/recovery/form/success-form/style';
 
 const RecoverySuccess = (): ReactNode => {
   return (
-    <div className="flex flex-col items-start w-[346px] h-full justify-center gap-3">
+    <div className={styles.container}>
       <Logo width={'179px'} height={'60px'} />
       <div className="flex flex-col w-full">
-        <h2 className="text-title font-extrabold text-[#040405] font-poppins mb-8">
-          Пароль успешно изменён!
-        </h2>
+        <h2 className={styles.header}>Пароль успешно изменён!</h2>
       </div>
     </div>
   );

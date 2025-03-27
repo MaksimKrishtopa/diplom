@@ -5,6 +5,7 @@ import Logo from '@/shared/components/icons/logo';
 import Button from '@/shared/components/button';
 import BackButton from '@/shared/components/back-button';
 import { debounce } from 'lodash';
+import styles from '@/features/recovery/form/confirm-form/style';
 
 const RecoveryEmailConfirmation = (): ReactNode => {
   const { handleSubmit, register, setValue } = useForm();
@@ -32,25 +33,23 @@ const RecoveryEmailConfirmation = (): ReactNode => {
   };
 
   return (
-    <div className="flex flex-col items-start w-[346px] h-full justify-between">
+    <div className={styles.recoveryContainer}>
       <div>
         <BackButton />
         <Logo width={'179px'} height={'60px'} />
       </div>
 
       <div className="flex flex-col w-full">
-        <h2 className="text-title font-extrabold text-[#040405] font-poppins mb-3">
-          Подтверждение кода
-        </h2>
-        <p className="text-[#040405]-normal mb-8">Введите код из письма</p>
+        <h2 className={styles.recoveryTitle}>Подтверждение кода</h2>
+        <p className={styles.recoveryDescription}>Введите код из письма</p>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <div className="flex justify-between mb-8 gap-2">
+          <div className={styles.recoveryInputWrapper}>
             {Array.from({ length: 6 }, (_, value) => (
               <Input
                 key={value}
                 type="text"
                 placeholder=""
-                className="w-12 h-12 text-center border-2 rounded-xl bg-[#FAFAFA] border-[#D1D1D1] focus:border-input-border-active focus:outline-none hover:border-input-border-active"
+                className={styles.recoveryInput}
                 required
                 label=""
                 {...register(`code-${value}`)}
@@ -63,14 +62,11 @@ const RecoveryEmailConfirmation = (): ReactNode => {
               />
             ))}
           </div>
-          <Button
-            type="submit"
-            className="w-full h-12 bg-primary text-white rounded-xl py-3 text-center cursor-pointer"
-          >
+          <Button type="submit" className={styles.recoveryButton}>
             Отправить
           </Button>
-          <div className="flex justify-center mt-4">
-            <button className="text-blue-500 cursor-pointer">
+          <div className={styles.recoveryResendButtonWrapper}>
+            <button className={styles.recoveryResendButton}>
               Отправить код повторно
             </button>
           </div>

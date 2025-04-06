@@ -108,7 +108,14 @@ const CreatePostForm: React.FC = () => {
       {step === 'preview' && (
         <>
 
-          <h2 className={style.subtitle}>Предпросмотр поста</h2>
+          <h2 className={style.subtitle}>Отображение в ленте</h2>
+          <div className={style.containerAvatarStyles}>
+                            <img
+                                src={user_image ? `${BACKEND_IMAGE_URL + user_image}` : avatarUserDefault}
+                                alt="Аватар пользователя"
+                                className={style.avatarStyles}
+                            />
+                        </div>
           <div onClick={() => setStep('form')}>
               <Button type="button" className={style.primaryButton}>
                 Назад

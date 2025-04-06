@@ -57,6 +57,10 @@ const style = {
     previewThemes: 'text-[#4B5563]',
   
     previewThemeList: 'list-disc pl-5 text-sm',
+
+    containerAvatarStyles:'ml-2',
+    
+    avatarStyles:'w-[50px] h-[50px] rounded-full border-2 border-white object-cover',
   };
   
   export { style };

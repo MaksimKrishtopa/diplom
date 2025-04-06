@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { style } from '@/features/posts/form//post-preview/style';
+import { style } from '@/features/posts/form/post-preview/style';
 import useUserInfoPresenter from "@/entities/case/user/personal-acoount/get-info/presenter";
 import { BACKEND_IMAGE_URL } from "@/shared/api/backend-image.ts";
 import avatarUserDefault from "@/assets/avatar.png";
@@ -12,6 +12,11 @@ const PostPreview: React.FC = () => {
   const { text, images, location, themes } = state ?? {};
 
   const { data } = useUserInfoPresenter();
+  
+  if (!state) {
+    navigate('/');
+    return null;
+  }
 
   return (
     <div className={style.wrapper}>
@@ -29,14 +34,18 @@ const PostPreview: React.FC = () => {
       </div>
 
       <div className={style.imagePreviewList}>
-        {images.map((img: File, idx: number) => (
-          <img
-            key={idx}
-            src={URL.createObjectURL(img)}
-            alt={`preview-${idx}`}
-            className={style.imagePreview}
-          />
-        ))}
+        {images && images.length > 0 ? (
+          images.map((img: File, idx: number) => (
+            <img
+              key={idx}
+              src={URL.createObjectURL(img)}
+              alt={`preview-${idx}`}
+              className={style.imagePreview}
+            />
+          ))
+        ) : (
+          <p>Нет изображений для отображения</p>
+        )}
       </div>
 
       {text && <p className={style.previewText}>{text}</p>}

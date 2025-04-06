@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Input from '@/shared/components/inputs/input';
-import Button from '@/shared/components/button';
-import { useNavigate } from 'react-router-dom';
-import {style} from "@/features/posts/form/post-form/style";
+import { style } from "@/features/posts/form/post-form/style";
+import UploadIcon from '@/shared/components/icons/upload';
+
+type CreatePostFormProps = {
+  onNext: (formState: {
+    text: string;
+    images: File[];
+    location: string;
+    themes: string[];
+  }) => void;
+};
 
 const availableThemes = [
   'Отдых на пляже', 'Приключения', 'Походы в горы', 'Дикая природа',
@@ -12,19 +20,37 @@ const availableThemes = [
   'Австралия', 'Антарктида'
 ];
 
-const CreatePostForm: React.FC = () => {
-  const navigate = useNavigate();
-
+const CreatePostForm: React.FC<CreatePostFormProps> = ({ onNext }) => {
   const [text, setText] = useState('');
   const [images, setImages] = useState<File[]>([]);
   const [location, setLocation] = useState('');
   const [themes, setThemes] = useState<string[]>([]);
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    onNext({ text, images, location, themes });
+  }, [text, images, location, themes]);
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      setImages([...images, ...Array.from(files)]);
+      const newImages = [...images, ...Array.from(files)];
+      setImages(newImages);
     }
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
+    if (files) {
+      const newImages = [...images, ...Array.from(files)];
+      setImages(newImages);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
   };
 
   const handleThemeSelection = (theme: string) => {
@@ -37,31 +63,39 @@ const CreatePostForm: React.FC = () => {
     );
   };
 
-  const handleNext = () => {
-    if (images.length === 0) return;
-    navigate('/posts/preview', {
-      state: {
-        text,
-        images,
-        location,
-        themes,
-      }
-    });
-  };
-
   return (
     <div className={style.wrapper}>
       <h2 className={style.title}>Создайте свой пост</h2>
 
       <div className={style.fieldWrapper}>
-        <Input
-          type="file"
-          label="Изображение *"
-          multiple
-          accept="image/jpeg, image/png"
-          onChange={handleImageUpload}
-          className={style.input}
-        />
+        <label 
+          className={style.inputWrapper}
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+        >
+          <div>
+            <UploadIcon width={'34px'} height={'34px'} />
+          </div>
+          <Input
+            type="file"
+            label=""
+            multiple
+            accept="image/jpeg, image/png"
+            onChange={handleImageUpload}
+            className={style.input}
+            ref={inputRef}
+          />
+          <span className={style.inputText}>Вставьте фото</span>
+        </label>
+
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          className={style.primaryButton}
+        >
+          Выберите файл
+        </button>
+
         {images.length === 0 && (
           <p className={style.error}>Добавьте изображение или видео</p>
         )}
@@ -104,12 +138,6 @@ const CreatePostForm: React.FC = () => {
             </button>
           ))}
         </div>
-      </div>
-
-      <div className={style.footerButtons}>
-        <Button type="button" className={style.primaryButton} onClick={handleNext}>
-          Далее
-        </Button>
       </div>
     </div>
   );

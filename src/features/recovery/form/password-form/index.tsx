@@ -1,53 +1,35 @@
-import React, { ReactNode } from 'react';
-import { useForm } from 'react-hook-form';
-import Input from '@/shared/components/inputs/input';
-import Logo from '@/shared/components/icons/logo';
-import Button from '@/shared/components/button';
-import BackButton from '@/shared/components/back-button';
-import styles from '@/features/recovery/form/password-form/style';
+import {ReactNode} from 'react';
+import Button from "@/shared/components/buttons/button";
+import useUserResetPasswordPresenter from "@/entities/case/recovery/reset-password/presenter";
+import InputPassword from "@/shared/components/inputs/password-input";
+import {recoveryFormGlobalStyles} from "@/features/recovery/form/style.ts";
 
-const PasswordForm = (): ReactNode => {
-  const { handleSubmit, register } = useForm();
+const ResetPasswordForm = (): ReactNode => {
+    const {register, errors, handleSubmit} = useUserResetPasswordPresenter()
 
-  const handleFormSubmit = (data: any) => {
-    console.log(data);
-  };
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.headerContainer}>
-        <BackButton />
-        <Logo width={'179px'} height={'60px'} />
-      </div>
-
-      <div className="flex flex-col w-full">
-        <h2 className={styles.title}>Новый пароль</h2>
-        <p className={styles.description}>Придумайте новый пароль</p>
-
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <Input
-            type="password"
-            placeholder="Введите пароль"
-            className={styles.input}
-            required
-            label="Пароль"
-            {...register("password")}
-          />
-          <Input
-            type="password"
-            placeholder="Введите повторно пароль"
-            className={styles.input}
-            required
-            label="Повтор пароля"
-            {...register("confirm-password")}
-          />
-          <Button type="submit" className={styles.button}>
-            Продолжить
-          </Button>
+    return (
+        <form onSubmit={handleSubmit} className={recoveryFormGlobalStyles.form} noValidate>
+            <InputPassword
+                label={'Пароль'}
+                placeholder={'Введите пароль'}
+                error={!!errors.password}
+                errorMessage={errors.password?.message}
+                max={100}
+                {...register('password')}
+            />
+            <InputPassword
+                label={'Повтор пароля'}
+                placeholder={'Введите повтор пароля'}
+                error={!!errors.password_repeat}
+                errorMessage={errors.password_repeat?.message}
+                max={100}
+                {...register('password_repeat')}
+            />
+            <Button type="submit">
+                Продолжить
+            </Button>
         </form>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default PasswordForm;
+export default ResetPasswordForm;

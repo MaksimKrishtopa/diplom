@@ -1,4 +1,13 @@
-export const recoveryContainerStyle = "flex items-center justify-center min-h-screen bg-light-blue";
-export const recoveryWrapperStyle = "flex background-light shadow-3xl";
-export const recoveryImageStyle = "w-[408px] h-[622px] object-cover rounded-xl";
-export const recoveryFormContainerStyle = "flex items-center justify-center";
+const recoveryPagesStyles = {
+    pageContainer: 'flex-column w-full h-full justify-between',
+    successPageContainer: 'flex-column w-full h-full justify-center gap-y-3',
+    logoContainer: 'flex-column gap-y-7',
+    contentContainer: 'flex-column w-full gap-y-8',
+    textContainer: 'flex-column gap-y-3',
+    title: 'text-title font-extrabold text-black-text font-poppins',
+    description: 'text-black-text-normal',
+};
+
+export {
+    recoveryPagesStyles
+}

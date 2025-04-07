@@ -17,7 +17,6 @@
     --color-secondary-disable: #E0E0E029;
     --color-secondary-disable-border: #C7C5C5 2px;
 
-
     --color-selective: #7E9E7F;
     --color-selective-border: #3DC13C 2px;
     --color-selective-hover: #65A266;
@@ -25,19 +24,14 @@
     --color-selective-disable: #E0E0E0;
     --color-selective-disable-border: #C7C5C5 2px;
 
-
-    --color-white-background: #FFFFFF;
+    --color-white: #FFFFFF;
     --shadow-3xl-white-background: 0px 0px 40px rgba(86, 135, 187, 0.24);
     --color-blue-background: #5687BBF2;
     --color-auth-background: #D5E7FB;
     --color-white-500: #E6E6F8;
 
-    --color-blue: #5687BB;
-    --color-white: #F0F4F3;
+    --color-white-background: #F0F4F3;
     --color-light-blue: #D5E7FB;
-
-    --color-white-text: #F0F4F3;
-    --color-blue-text: #5687BB;
 
     --color-input-background: #FAFAFA;
     --color-input-border: #D1D1D1;
@@ -57,7 +51,12 @@
     --text-paragraph-sm: 12px;
     --text-paragraph-xs: 10px;
     --shadow-3xl: 10px 10px 6px rgba(0, 0, 0, 0.25);
+}
 
+@layer utilities {
+    .border-inset {
+        box-shadow: inset 0 0 0 2px var(--color-primary, #5687BB);
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -68,4 +67,9 @@ h1, h2, h3, h4, h5, h6 {
 
 p, span, input, button, label {
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }

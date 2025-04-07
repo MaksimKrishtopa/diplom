@@ -1,39 +1,30 @@
-import React, { ReactNode } from 'react';
-import { useForm } from 'react-hook-form';
+import {ReactNode} from 'react';
 import Input from '@/shared/components/inputs/input';
-import Logo from '@/shared/components/icons/logo';
-import Button from '@/shared/components/button';
-import styles from '@/features/recovery/form/email-form/style';
+import Button from "@/shared/components/buttons/button";
+import {recoveryFormGlobalStyles} from "../style.ts";
+import useSendResetPasswordEmailPresenter from "@/entities/case/recovery/email-form/presenter";
 
-const RecoveryEmailInput = (): ReactNode => {
-  const { handleSubmit, register } = useForm();
+const RecoveryEmailInputForm = (): ReactNode => {
+    const {register, errors, handleSubmit} = useSendResetPasswordEmailPresenter()
 
-  const handleFormSubmit = (data: any) => {
-    console.log(data);
-  };
 
-  return (
-    <div className={styles.container}>
-      <Logo width={'179px'} height={'60px'} />
-      <div className="flex flex-col w-full">
-        <h2 className={styles.title}>Забыли пароль?</h2>
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
-          <Input
-            type="email"
-            placeholder="Введите e-mail"
-            className={styles.input}
-            required
-            label="E-mail"
-            max={255}
-            {...register("email")}
-          />
-          <Button type="submit" className={styles.button}>
-            Продолжить
-          </Button>
+    return (
+        <form onSubmit={handleSubmit} className={recoveryFormGlobalStyles.form} noValidate>
+            <Input
+                type="email"
+                placeholder="Введите e-mail"
+                required
+                label="E-mail"
+                error={!!errors.email}
+                errorMessage={errors.email?.message}
+                max={255}
+                {...register("email")}
+            />
+            <Button type="submit">
+                Продолжить
+            </Button>
         </form>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default RecoveryEmailInput;
+export default RecoveryEmailInputForm;

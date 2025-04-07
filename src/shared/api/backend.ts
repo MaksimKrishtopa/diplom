@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DEFAULT_URL} from '@/shared/config/api';
+import {DEFAULT_URL} from "@/shared/config/constants/env";
 
 const BACKEND_HTTPS_SERVICES = axios.create({
     baseURL: DEFAULT_URL,

@@ -1,8 +1,10 @@
-const formContainer = {
-    formContainerStyles:'flex justify-center items-center p-8 rounded-3xl bg-white-background w-fit h-fit shadow-3xl-white-background',
-    pageContainerAuthStyles: "min-h-screen flex bg-auth-background justify-center items-center",
-    ContainerAuthStyles: "flex"
+const authPageStyles = {
+    flexColumn: 'flex flex-col',
+    pageContainer: 'w-full h-full justify-between',
+    contentContainer: 'w-full gap-y-8',
+    title: 'text-title font-extrabold text-black-text font-poppins'
+};
+
+export {
+    authPageStyles
 }
-
-
-export {formContainer}

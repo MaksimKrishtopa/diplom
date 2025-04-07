@@ -1,9 +1,18 @@
 import {lazy} from "react";
 import {LoadComponent} from "@/shared/components/lazy-load";
 
-export const LazyMainPage = LoadComponent(lazy(async () => import("@/pages/main")));
-export const LazyEmailInput = LoadComponent(lazy(() => import("@/pages/recovery/email-input")));
-export const LazyEmailConfirmation = LoadComponent(lazy(() => import("@/pages/recovery/email-confirm")));
-export const LazyNewPassword = LoadComponent(lazy(() => import("@/pages/recovery/new-password")));
-export const LazyRecoverySuccess = LoadComponent(lazy(() => import("@/pages/recovery/recovery-success")));
-export const AuthMainPage = LoadComponent(lazy(async () => import("@/pages/auth/index")))
+const LazyMainPage = LoadComponent(lazy(async () => import("@/pages/main")));
+const LazyEmailInput = LoadComponent(lazy(() => import("@/pages/recovery/email-input")));
+const LazyEmailConfirmation = LoadComponent(lazy(() => import("@/pages/recovery/email-confirm")));
+const LazyNewPassword = LoadComponent(lazy(() => import("@/pages/recovery/new-password")));
+const LazyRecoverySuccess = LoadComponent(lazy(() => import("@/pages/recovery/recovery-success")));
+const LazyAuthPage = LoadComponent(lazy(async () => import("@/pages/auth")))
+
+export {
+    LazyMainPage,
+    LazyEmailInput,
+    LazyEmailConfirmation,
+    LazyNewPassword,
+    LazyRecoverySuccess,
+    LazyAuthPage
+}

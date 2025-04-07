@@ -1,8 +1,5 @@
 import {SVGProps} from "react";
 
-interface IIconProps extends SVGProps<SVGSVGElement> {
-    width: string;
-    height: string;
-}
+type IIconProps = SVGProps<SVGSVGElement>
 
 export default IIconProps;

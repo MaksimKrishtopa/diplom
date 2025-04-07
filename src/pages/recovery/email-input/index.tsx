@@ -1,21 +1,18 @@
-import React, { ReactNode } from 'react';
-import RecoveryEmailInput from '@/features/recovery/form/email-form';
-import backgroundImage from '@/assets/backgroundShapes.png';
-import { recoveryContainerStyle, recoveryWrapperStyle, recoveryImageStyle, recoveryFormContainerStyle } from '@/pages/recovery/style';
+import {ReactNode} from 'react';
+import CompassTrailTalesIcon from "@/shared/components/icons/logo/compass-trail-tales";
+import RecoveryEmailInputForm from "@/features/recovery/form/email-form";
+import {recoveryPagesStyles} from "../style.ts";
 
 const EmailInputPage = (): ReactNode => {
-  return (
-    <div className={recoveryContainerStyle}>
-      <div className={recoveryWrapperStyle}>
-        <div className="mr-8">
-          <img src={backgroundImage} alt="Recovery-bg" className={recoveryImageStyle} />
+    return (
+        <div className={recoveryPagesStyles.pageContainer}>
+            <CompassTrailTalesIcon/>
+            <div className={recoveryPagesStyles.contentContainer}>
+                <h1 className={recoveryPagesStyles.title}>Забыли пароль?</h1>
+                <RecoveryEmailInputForm/>
+            </div>
         </div>
-        <div className={recoveryFormContainerStyle}>
-          <RecoveryEmailInput />
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default EmailInputPage;

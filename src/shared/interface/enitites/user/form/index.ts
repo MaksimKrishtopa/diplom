@@ -1,5 +1,21 @@
-import {IAuthPort} from "@/shared/interface/enitites/user/port";
+import {
+    IAuthPort,
+    IUserEmailCodePort,
+    IUserEmailPort,
+    IUserResetPasswordPort
+} from "@/shared/interface/enitites/user/port";
 
 type IUserForm = IAuthPort
 
-export default IUserForm;
+type IResetPasswordEmailForm = IUserEmailPort
+
+type IResetPasswordCodeForm = IUserEmailCodePort
+
+type IUserResetPasswordForm = Pick<IUserResetPasswordPort, "password"> & {password_repeat: string}
+
+export type {
+    IResetPasswordEmailForm,
+    IUserForm,
+    IResetPasswordCodeForm,
+    IUserResetPasswordForm
+}

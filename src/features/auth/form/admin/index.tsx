@@ -2,10 +2,10 @@ import {ReactNode} from "react";
 import LogoForm from "@/widget/logo-login";
 import ErrorMessage from "@/shared/components/error-message";
 import InputPassword from "@/shared/components/inputs/password-input";
-import Button from "@/shared/components/button";
 import useAuthUserPresenter from "@/entities/case/user/login/presenter";
 import {form} from "@/features/auth/form/admin/style.ts";
 import Input from "@/shared/components/inputs/input";
+import Button from "@/shared/components/buttons/button";
 
 
 const AuthorizationFormAdmin = (): ReactNode => {
@@ -32,8 +32,6 @@ const AuthorizationFormAdmin = (): ReactNode => {
                 </div>
                 <div className={form.inputFieldStyles}>
                     <InputPassword
-                        type={'password'}
-                        required={true}
                         label={'Пароль'}
                         className={form.sizeInputStyles}
                         placeholder={'Введите пароль'}

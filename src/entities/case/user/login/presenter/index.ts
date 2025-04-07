@@ -5,16 +5,18 @@ import {useNavigate} from "react-router-dom";
 import ERouterPath from "@/shared/common/enum/router";
 import {UserAuthContext} from "@/app/provider/context";
 import {BaseSyntheticEvent, useContext} from "react";
-import {loginSchema} from "@/shared/lib/schema/user/login";
 import {IAuthPort} from "@/shared/interface/enitites/user/port";
-import IUserForm from "@/shared/interface/enitites/user/form";
 import {IUserDto} from "@/shared/interface/enitites/user/dto/type.ts";
+import {IUserForm} from "@/shared/interface/enitites/user/form";
+import {loginSchema} from "@/entities/case/user/login/schema";
+import {EValidationErrorValues} from "@/shared/enum/error-values";
 
 
 interface IAuthAdminsPresenterReturn {
     handleSubmit: (e?: BaseSyntheticEvent) => Promise<void>,
     errors: FieldErrors<IUserDto>,
     register: UseFormRegister<any>,
+    handleNavigateRecoverPass(): void
 }
 
 
@@ -41,16 +43,21 @@ const useAuthUserPresenter = (): IAuthAdminsPresenterReturn => {
             },
             onError: () => {
                 setError('root', {
-                    message: 'Неверный email или пароль',
+                    message: EValidationErrorValues.AUTH_MESSAGE,
                 });
             }
         })
     };
 
+    const handleNavigateRecoverPass = () => {
+        navigate(ERouterPath.RECOVERY)
+    }
+
     return {
         handleSubmit: handleSubmit(onSubmit),
         errors: errors,
-        register
+        register,
+        handleNavigateRecoverPass
     };
 };
 

@@ -6,3 +6,4 @@ export const LazyEmailInput = LoadComponent(lazy(() => import("@/pages/recovery/
 export const LazyEmailConfirmation = LoadComponent(lazy(() => import("@/pages/recovery/email-confirm")));
 export const LazyNewPassword = LoadComponent(lazy(() => import("@/pages/recovery/new-password")));
 export const LazyRecoverySuccess = LoadComponent(lazy(() => import("@/pages/recovery/recovery-success")));
+export const AuthMainPage = LoadComponent(lazy(async () => import("@/pages/auth/index")))

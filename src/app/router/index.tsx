@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { LazyMainPage, LazyEmailInput, LazyEmailConfirmation, LazyNewPassword, LazyRecoverySuccess } from "@/pages";
 import ERouterPath from "@/shared/common/enum/router";
+import AuthUserPage from "@/pages/auth/index.tsx";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,12 @@ const router = createBrowserRouter([
     {
         element: <LazyRecoverySuccess />,
         path: ERouterPath.RECOVERY_SUCCESS
-    }
+    },
+    {
+        element: <AuthUserPage/>,
+        path: ERouterPath.LOGIN_PAGE,
+    },
+
 ]);
 
 export default router;

@@ -1,0 +1,30 @@
+include:
+  - project: "trainee/ci-cd"
+    ref: dev
+    file: "builds.yml"
+  - project: "trainee/ci-cd"
+    ref: dev
+    file: "deploy-front.yml"
+
+stages:
+  - build
+  - deploy-dev
+
+build:
+  extends: .build-app-by-branch
+  only:
+    - dev
+  variables:
+    RUNNER_TAGS: front-common
+
+deploy-dev:
+  extends: .deploy-front
+  only:
+    - dev
+  variables:
+    RUNNER_TAGS: front-common
+    SERVER_KEY: $TRAINEE_DEV_KEY
+    SERVER_IP: $TRAINEE_DEV_IP
+    CONTAINER_NAME: travelers-blog-front
+    PUBLISHED_PORT: 20031
+    INTERNAL_PORT: 80

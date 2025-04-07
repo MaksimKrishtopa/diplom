@@ -21,7 +21,7 @@ const BackButton = ({
 
     return (
         <button onClick={handleNavigate}
-                className={makeClassname(backButtonStyles.button, className)}>
+                className={makeClassname(backButtonStyles.button, className)} type='button'>
             <BackArrowIcon/>
             {label}
         </button>

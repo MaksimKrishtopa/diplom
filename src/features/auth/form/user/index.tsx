@@ -37,6 +37,7 @@ const AuthorizationFormUser = (): ReactNode => {
                 </div>
                 <div className={authFormStyles.forgotPasswordWrap}>
                     <button
+                        type='button'
                         onClick={handleNavigateRecoverPass}
                         className={authFormStyles.forgotPasswordButton}
                     >

@@ -1,14 +1,13 @@
-
 import {ReactNode} from "react";
-import clsx from "clsx";
 import {messageError} from "@/shared/components/error-message/style.ts";
-import {ErrorMessageProps} from "@/shared/interface/ui/validation";
+import {IErrorMessageProps} from "@/shared/interface/ui/error-message";
+import {makeClassname} from "@/shared/utils/functions/classname";
 
-const ErrorMessage = ({ message, className }: ErrorMessageProps): ReactNode => {
+const ErrorMessage = ({ message, className }: IErrorMessageProps): ReactNode => {
     if (!message) return null;
 
     return (
-        <span className={clsx(messageError.textError, className)}>
+        <span className={makeClassname(messageError.textError, className)}>
             {message}
         </span>
     );

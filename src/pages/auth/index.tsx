@@ -1,17 +1,16 @@
 import {ReactNode} from 'react';
-import {formContainer} from "@/pages/auth/style";
-import BackgroundLogin from "@/widget/background-login";
 import AuthorizationFormUser from "@/features/auth/form/user";
+import {makeClassname} from "@/shared/utils/functions/classname";
+import CompassTrailTalesIcon from "@/shared/components/icons/logo/compass-trail-tales";
+import {authPageStyles} from "@/pages/auth/style.ts";
 
 const AuthUserPage = (): ReactNode => {
-
     return (
-        <div className={formContainer.pageContainerAuthStyles}>
-            <div className={formContainer.formContainerStyles}>
-                <BackgroundLogin/>
-                <div className={formContainer.ContainerAuthStyles}>
-                    <AuthorizationFormUser/>
-                </div>
+        <div className={makeClassname(authPageStyles.flexColumn, authPageStyles.pageContainer)}>
+            <CompassTrailTalesIcon/>
+            <div className={makeClassname(authPageStyles.flexColumn, authPageStyles.contentContainer)}>
+                <h1 className={authPageStyles.title}>Вход в систему</h1>
+                <AuthorizationFormUser/>
             </div>
         </div>
     );

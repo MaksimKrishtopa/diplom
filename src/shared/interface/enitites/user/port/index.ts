@@ -8,4 +8,18 @@ interface IUserPort {
     birth_date: string;
 }
 
-export type {IAuthPort,IUserPort}
+type IUserEmailPort = Pick<IUserDto, 'email'>
+
+interface IUserEmailCodePort {
+    code: string
+}
+
+type IUserResetPasswordPort = Pick<IUserDto, 'password' | 'email'> & IUserEmailCodePort
+
+export type {
+    IAuthPort,
+    IUserPort,
+    IUserEmailPort,
+    IUserResetPasswordPort,
+    IUserEmailCodePort
+}

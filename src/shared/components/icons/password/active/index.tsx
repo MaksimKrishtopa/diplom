@@ -2,9 +2,11 @@ import {ReactNode} from "react";
 import IIconProps from "@/shared/interface/ui/icon";
 
 
-const IconPasswordActive= (props: IIconProps): ReactNode => {
+const PasswordActiveIcon = ({width = 24, height = 24, ...props}: IIconProps): ReactNode => {
     return (
         <svg
+            width={width}
+            height={height}
             {...props}
             viewBox="0 0 24 24"
             fill="none"
@@ -28,4 +30,4 @@ const IconPasswordActive= (props: IIconProps): ReactNode => {
     );
 };
 
-export default IconPasswordActive;
+export default PasswordActiveIcon;

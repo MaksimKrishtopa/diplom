@@ -8,4 +8,20 @@ interface IUserPort {
     birth_date: string;
 }
 
-export type {IAuthPort,IUserPort}
+interface IUserImagePort {
+    image: File;
+}
+
+interface IUserPasswordPort {
+    old_password: string,
+    new_password: string;
+}
+
+interface IUserInfoPort {
+    real_name?:string;
+    description?: string;
+    birth_date?: string;
+}
+
+
+export type {IAuthPort,IUserPort, IUserInfoPort,IUserPasswordPort,IUserImagePort}

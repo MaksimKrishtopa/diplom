@@ -2,7 +2,8 @@ import {createBrowserRouter} from "react-router-dom";
 import {LazyMainPage} from "@/pages";
 import ERouterPath from "@/shared/common/enum/router";
 import AuthUserPage from "@/pages/auth/index.tsx";
-import CreatePostPage from "@/pages/posts/index.tsx";
+import CreatePostPage from "@/pages/posts/create-post";
+import PreviewPostPage from "@/pages/posts/preview-post";
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
     {
         element: <CreatePostPage/>,
         path: ERouterPath.CREATE_POST,
+    },
+    {
+        element: <PreviewPostPage/>,
+        path: ERouterPath.PREVIEW_POST,
     },
 
 ])

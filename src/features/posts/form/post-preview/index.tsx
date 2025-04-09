@@ -21,8 +21,12 @@ const PostPreview: React.FC = () => {
   return (
     <div className={style.wrapper}>
       <h2 className={style.subtitle}>Отображение в ленте</h2>
+      <Button type="button" className={style.primaryButton} onClick={() => navigate(-1)}>
+          Назад
+        </Button>
 
       <div className={style.containerUser}>
+        
         <img
           src={data?.user_image ? `${BACKEND_IMAGE_URL + data.user_image}` : avatarUserDefault}
           className={style.avatarUser}
@@ -55,20 +59,24 @@ const PostPreview: React.FC = () => {
       )}
 
       {themes?.length > 0 && (
-        <div className={style.previewThemes}>
-          <strong>Темы:</strong>
-          <ul className={style.previewThemeList}>
+        <div className={style.themeWrapper}>
+          <label className={style.themeLabel}>Темы:</label>
+          <div className={style.themeList}>
             {themes.map((t: string) => (
-              <li key={t}>{t}</li>
+              <button
+                key={t}
+                type="button"
+                className={`${style.themeButton} ${style.themeButtonSelected}`}
+                disabled
+              >
+                {t}
+              </button>
             ))}
-          </ul>
+          </div>
         </div>
       )}
 
       <div className={style.footerButtons}>
-        <Button type="button" className={style.primaryButton} onClick={() => navigate(-1)}>
-          Назад
-        </Button>
         <Button type="button" className={style.moderationButton}>
           На модерацию
         </Button>

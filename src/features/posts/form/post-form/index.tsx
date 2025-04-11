@@ -1,145 +1,97 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Input from '@/shared/components/inputs/input';
-import { style } from "@/features/posts/form/post-form/style";
-import UploadIcon from '@/shared/components/icons/upload';
+import { useState } from "react";
+import Input from "@/shared/components/inputs/input";
+import ErrorMessage from "@/shared/components/error-message";
+import useCreatePostPresenter from "@/entities/case/post/create/presenter";
 
-type CreatePostFormProps = {
-  onNext: (formState: {
+interface CreatePostFormProps {
+  onNext: React.Dispatch<React.SetStateAction<{
     text: string;
     images: File[];
     location: string;
     themes: string[];
-  }) => void;
-};
-
-const availableThemes = [
-  'Отдых на пляже', 'Приключения', 'Походы в горы', 'Дикая природа',
-  'Культурный туризм', 'Гастрономический туризм', 'Семейный отдых',
-  'Романтическое путешествие', 'Шоппинг-туризм', 'Оздоровительный туризм',
-  'Европа', 'Азия', 'Африка', 'Северная Америка', 'Южная Америка',
-  'Австралия', 'Антарктида'
-];
+  }>>;
+}
 
 const CreatePostForm: React.FC<CreatePostFormProps> = ({ onNext }) => {
-  const [text, setText] = useState('');
-  const [images, setImages] = useState<File[]>([]);
-  const [location, setLocation] = useState('');
-  const [themes, setThemes] = useState<string[]>([]);
+  const {
+    register, handleSubmit, errors, onSubmit, themes, isThemesLoading, setValue
+  } = useCreatePostPresenter();
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [selectedTheme, setSelectedTheme] = useState<number[]>([]);
 
-  useEffect(() => {
-    onNext({ text, images, location, themes });
-  }, [text, images, location, themes]);
-
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files) {
-      const newImages = [...images, ...Array.from(files)];
-      setImages(newImages);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setImagePreview(URL.createObjectURL(file));
+      setValue("image", file);
     }
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-    const files = event.dataTransfer.files;
-    if (files) {
-      const newImages = [...images, ...Array.from(files)];
-      setImages(newImages);
-    }
-  };
-
-  const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
-    event.preventDefault();
-  };
-
-  const handleThemeSelection = (theme: string) => {
-    setThemes((prevThemes) =>
-      prevThemes.includes(theme)
-        ? prevThemes.filter(t => t !== theme)
-        : prevThemes.length < 5
-          ? [...prevThemes, theme]
-          : prevThemes
-    );
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+    setSelectedTheme(selected.map(Number));
+    setValue("theme_ids", selected.map(Number));
   };
 
   return (
-    <div className={style.wrapper}>
-      <h2 className={style.title}>Создайте свой пост</h2>
-
-      <div className={style.fieldWrapper}>
-        <label 
-          className={style.inputWrapper}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-        >
-          <div>
-            <UploadIcon width={'34px'} height={'34px'} />
+    <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+      <div>
+        <label>Изображение (обязательно)</label>
+        <input type="file" accept="image/*" onChange={handleImageChange} />
+        <ErrorMessage message={errors.image?.message} />
+        {imagePreview && (
+          <div style={{ marginTop: "10px" }}>
+            <img src={imagePreview} alt="Предпросмотр" style={{ maxWidth: "100%", height: "auto" }} />
           </div>
-          <Input
-            type="file"
-            label=""
-            multiple
-            accept="image/jpeg, image/png"
-            onChange={handleImageUpload}
-            className={style.input}
-            ref={inputRef}
-          />
-          <span className={style.inputText}>Вставьте фото</span>
-        </label>
+        )}
+      </div>
 
-        <button
-          type="button"
-          onClick={() => inputRef.current?.click()}
-          className={style.primaryButton}
+      <div>
+        <Input
+          label="Текст поста"
+          placeholder="Введите текст"
+          {...register("text")}
+        />
+        <ErrorMessage message={errors.text?.message} />
+      </div>
+
+      <div>
+        <Input
+          label="Местоположение"
+          placeholder="Введите место"
+          {...register("location")}
+        />
+        <ErrorMessage message={errors.location?.message} />
+      </div>
+
+      <div>
+    <label>Темы (не более 5):</label>
+    {isThemesLoading ? (
+        <p>Загрузка тем...</p>
+    ) : (
+        <select
+        multiple
+        value={selectedTheme.map(String)}
+        onChange={(e) => {
+            const options = Array.from(e.target.selectedOptions).map(o => Number(o.value));
+            if (options.length <= 5) {
+            setSelectedTheme(options);
+            setValue("theme_ids", options);
+            }
+        }}
         >
-          Выберите файл
-        </button>
-
-        {images.length === 0 && (
-          <p className={style.error}>Добавьте изображение или видео</p>
-        )}
-        {images.length > 0 && (
-          <ul className={style.imageList}>
-            {images.map((img, idx) => (
-              <li key={idx} className={style.imageName}>{img.name}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <textarea
-        className={style.textarea}
-        placeholder="Напишите что-нибудь"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-
-      <Input
-        type="text"
-        label="Геопозиция"
-        placeholder="Например, Париж"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        className={style.input}
-      />
-
-      <div className={style.themeWrapper}>
-        <label className={style.themeLabel}>Темы:</label>
-        <div className={style.themeList}>
-          {availableThemes.map((theme) => (
-            <button
-              key={theme}
-              type="button"
-              className={`${style.themeButton} ${themes.includes(theme) ? style.themeButtonSelected : ''}`}
-              onClick={() => handleThemeSelection(theme)}
-            >
-              {theme}
-            </button>
-          ))}
-        </div>
-      </div>
+        {themes?.map((theme) => (
+            <option key={theme.id} value={theme.id}>
+            {theme.title}
+            </option>
+        ))}
+        </select>
+    )}
+    <ErrorMessage message={errors.theme_ids?.message} />
     </div>
+    </form>
   );
 };
 

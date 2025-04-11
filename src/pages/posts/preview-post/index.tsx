@@ -8,6 +8,10 @@ const PreviewPostPage: React.FC = () => {
   const location = useLocation();
   const formState = location.state;
 
+  if (!formState) {
+    return <div>Ошибка: нет данных для предварительного просмотра</div>;
+  }
+
   return (
     <div className={style.page}>
       <h2 className={style.title}>Создание публикации</h2>
@@ -20,7 +24,6 @@ const PreviewPostPage: React.FC = () => {
       <div className={style.formWrapper}>
         <PostPreview data={formState} />
       </div>
-
     </div>
   );
 };

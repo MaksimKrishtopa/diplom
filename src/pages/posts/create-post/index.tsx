@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreatePostForm from '@/features/posts/form/post-form';
 import { style } from '@/pages/posts/create-post/style';
-import Button from '@/shared/components/button'
+import Button from '@/shared/components/button';
 
 const CreatePostPage: React.FC = () => {
   const navigate = useNavigate();
@@ -20,12 +20,13 @@ const CreatePostPage: React.FC = () => {
   });
 
   const handleNext = () => {
-    if (formState.images.length === 0) {
+    // Проверка на обязательные данные
+    if (!formState.text || !formState.location || formState.images.length === 0) {
       return;
     }
 
     navigate('/preview-post', {
-      state: formState,
+      state: formState, // Передаем данные формы на страницу предварительного просмотра
     });
   };
 
@@ -43,7 +44,7 @@ const CreatePostPage: React.FC = () => {
       </div>
 
       <div className={style.footerButtons} onClick={handleNext}>
-        <Button type="submit" className={style.primaryButton}>
+        <Button type="button" className={style.primaryButton}>
           Далее
         </Button>
       </div>

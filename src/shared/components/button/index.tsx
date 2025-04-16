@@ -6,16 +6,20 @@ import {VariantProps} from "class-variance-authority";
 type IStyledButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
     & VariantProps<typeof buttonStyles>
 
-const Button = ({
-                    variant,
-                    className,
-                    children,
-                }: IStyledButtonProps): ReactNode => {
-    return (
-        <button className={makeClassname(buttonStyles({variant}), className)} >
+    const Button = ({
+        variant,
+        className,
+        children,
+        ...props
+      }: IStyledButtonProps): ReactNode => {
+        return (
+          <button
+            {...props}
+            className={makeClassname(buttonStyles({ variant }), className)}
+          >
             {children}
-        </button>
-    );
-};
+          </button>
+        );
+      };
 
 export default Button;

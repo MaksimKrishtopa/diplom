@@ -2,7 +2,8 @@ enum ERouterPath {
     MAIN_PAGE = '/',
     LOGIN_PAGE = '/login',
     REGISTER_PAGE = '/register',
-    CREATE_POST = '/create-post'
+    CREATE_POST = '/create-post',
+    PREVIEW_POST = '/preview-post'
 }
 
 export default ERouterPath

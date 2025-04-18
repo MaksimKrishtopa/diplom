@@ -18,17 +18,12 @@ const PostPreviewForm = ({ formData, isLoading, error }: Props) => {
       .catch(() => console.error("Ошибка загрузки тем."));
   }, []);
 
-  if (!formData) {
-    return <p className="text-center text-red-500">Нет данных для предпросмотра.</p>;
-  }
-
   const selectedThemeTitles = formData.theme_ids?.map(
     (id: string) => themes.find((theme) => String(theme.id) === id)?.title
   ).filter(Boolean);
 
   return (
     <div className={style.previewCard}>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
 
       <p className={style.locationText}>{formData.location}</p>
 

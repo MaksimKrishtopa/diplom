@@ -48,8 +48,6 @@ const MainPage = () => {
         )}
       </div>
 
-      <div className="mt-20 text-center text-2xl font-bold">Добро пожаловать!</div>
-
       <PostFeed />
     </div>
   );

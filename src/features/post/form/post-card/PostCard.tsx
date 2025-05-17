@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { PostPayload, Theme, Comment } from "@/shared/interface/enitites/posts";
 import { getUserById } from "@/entities/repository/userRepository";
@@ -15,14 +15,16 @@ import {
   toggleLike,
   fetchCommentsForPost,
   createComment,
+  deletePost,
 } from "@/entities/repository/postRepository";
 
 interface Props {
   post: PostPayload;
   themes: Theme[];
+  onDelete: (postId: string) => void;
 }
 
-const PostCard = ({ post, themes }: Props) => {
+const PostCard = ({ post, themes, onDelete }: Props) => {
   const { session } = useAuth();
   const userId = session?.user.id;
   const navigate = useNavigate();
@@ -33,9 +35,11 @@ const PostCard = ({ post, themes }: Props) => {
   const [favorited, setFavorited] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
-  const [shareMessage, setShareMessage] = useState("");
   const [commentsVisible, setCommentsVisible] = useState(false);
   const [commentInputVisible, setCommentInputVisible] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const isAuthor = userId === post.creator_id;
 
   useEffect(() => {
     getUserById(post.creator_id)
@@ -75,16 +79,16 @@ const PostCard = ({ post, themes }: Props) => {
     const shareUrl = `${window.location.origin}/posts/${post.id}`;
     const title = "Посмотри, что я нашёл!";
     const text = post.text?.slice(0, 80) + "...";
-  
+
     if (navigator.share) {
       try {
         await navigator.share({ title, text, url: shareUrl });
       } catch (err) {
         console.error(err);
       }
-    } else {
     }
   };
+  
 
   const handleViewPost = () => {
     navigate(`/posts/${post.id}`);
@@ -111,18 +115,51 @@ const PostCard = ({ post, themes }: Props) => {
 
   return (
     <div className={style.card}>
-      <div className={style.header}>
-        <p className={style.author}>{authorName}</p>
-        <p className={style.date}>
-          {new Date(post.created_at || "").toLocaleString("ru-RU", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </p>
+<div className={style.header}>
+  <p className={style.author}>{authorName}</p>
+  
+  <div className={style.headerRight}>
+    <p className={style.date}>
+      {new Date(post.created_at || "").toLocaleString("ru-RU", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      })}
+    </p>
+
+    {isAuthor && (
+      <div className={style.menuWrapper}>
+        <button
+          onClick={() => setMenuOpen((prev) => !prev)}
+          className={style.menuButton}
+        >
+          ...
+        </button>
+        {menuOpen && (
+          <div className={style.menuDropdown}>
+            <button
+              className={style.deleteButton}
+              onClick={async () => {
+                try {
+                  await deletePost(post.id);
+                  onDelete(post.id);
+                } catch (error) {
+                  console.error("Ошибка при удалении поста:", error);
+                  alert("Не удалось удалить пост");
+                }
+              }}
+            >
+              Удалить
+            </button>
+          </div>
+        )}
       </div>
+    )}
+  </div>
+</div>
+            
 
       <p className={style.location}>{post.location}</p>
 
@@ -134,7 +171,6 @@ const PostCard = ({ post, themes }: Props) => {
         ))}
       </div>
 
-      
       <div onClick={handleViewPost}>
         {post.image && <img src={post.image} alt="Пост" className={style.image} />}
       </div>

@@ -1,7 +1,8 @@
 import { supabase } from "@/shared/config/supabaseClient";
 import { PostPayload, Theme } from "@/shared/interface/enitites/posts";
+import { CreatePostPayload } from "@/shared/interface/enitites/posts";
 
-export const createPost = async (post: PostPayload) => {
+export const createPost = async (post: CreatePostPayload) => {
   const { data: postData, error: postError } = await supabase
     .from("posts")
     .insert([{
@@ -71,9 +72,35 @@ export const checkIfUserLikedPost = async (
 };
 
 export const likePost = async (postId: string, userId: string) => {
+  const { data: post, error: postError } = await supabase
+    .from("posts")
+    .select("creator_id")
+    .eq("id", postId)
+    .single();
+
+  if (postError) throw postError;
+
+  if (post.creator_id !== userId) {
+    const content = "Ваш пост кому-то понравился!";
+
+    const { error: notifError } = await supabase
+      .from("notifications")
+      .insert([
+        {
+          user_id: post.creator_id,
+          content: content,
+          is_read: false,
+          created_at: new Date().toISOString(),
+        },
+      ]);
+
+    if (notifError) throw notifError;
+  }
+
   const { error } = await supabase
     .from("post_likes")
     .insert([{ post_id: postId, user_id: userId }]);
+
   if (error) throw error;
 };
 
@@ -165,7 +192,10 @@ export const fetchCommentsForPost = async (postId: string) => {
   }));
 };
 
-
+export const deletePost = async (postId: string) => {
+  const { error } = await supabase.from("posts").delete().eq("id", postId);
+  if (error) throw error;
+};
 
 export const fetchPostById = async (postId: string): Promise<PostPayload> => {
   const { data, error } = await supabase

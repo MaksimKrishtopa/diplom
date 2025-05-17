@@ -11,6 +11,10 @@ const PostFeed = () => {
   const [error, setError] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
+  const handleDeletePost = (postId: string) => {
+  setPosts((prev) => prev.filter((p) => p.id !== postId));
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -60,7 +64,7 @@ const PostFeed = () => {
       </div>
 
       {sortedPosts.map((post) => (
-        <PostCard key={post.created_at + post.creator_id} post={post} themes={themes} />
+        <PostCard key={post.created_at + post.creator_id} post={post} themes={themes} onDelete={handleDeletePost} />
       ))}
     </div>
   );

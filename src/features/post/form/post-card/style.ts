@@ -1,6 +1,7 @@
 const style = {
   card: "rounded p-4 shadow-md bg-white mb-4",
   header: "flex justify-between items-start mb-1",
+  headerRight: "flex flex-col items-end",
   author: "font-semibold text-gray-800",
   location: "text-sm text-gray-600 mb-2",
   themesWrapper: "flex gap-2 flex-wrap mb-2",
@@ -11,8 +12,8 @@ const style = {
   iconButton: "p-1 flex items-center gap-1 hover:opacity-80 transition cursor-pointer",
   iconText: "text-sm text-gray-600",
   actionsWrapper: "flex justify-between items-center mt-3",
-  leftActions: "flex gap-4 items-center",  // Кнопки слева
-  rightActions: "flex items-center", // Кнопка избранного справа
+  leftActions: "flex gap-4 items-center",
+  rightActions: "flex items-center",
   commentsList: "mt-4",
   commentItem: "mb-2 flex items-start gap-2",
   avatar: "w-8 h-8 rounded-full",
@@ -22,6 +23,11 @@ const style = {
   commentInputBlock: "mt-4",
   textarea: "w-full p-2 border border-gray-300 rounded",
   sendButton: "mt-2 bg-blue-500 text-white px-4 py-2 rounded",
+  menuWrapper: "relative inline-block text-left",
+  menuButton: "text-gray-500 hover:text-gray-700 text-xl px-2 cursor-pointer",
+  menuDropdown: "absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow-md z-10",
+  deleteButton: "w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 cursor-pointer",
 };
+
 
 export default style;

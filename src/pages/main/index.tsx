@@ -5,6 +5,7 @@ import { supabase } from "@/shared/config/supabaseClient";
 import { useAuth } from "@/shared/hooks/auth";
 import EditIcon from "@/shared/components/icons/create";
 import PostFeed from "@/features/content-feed/form/PostFeed";
+import { Notification } from "@/features/notification/form/Notification";
 
 const MainPage = () => {
   const { session, isLoading } = useAuth();
@@ -27,11 +28,11 @@ const MainPage = () => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <div className="absolute top-4 right-4 flex items-center gap-2">
+      <div className="absolute top-4 right-4 flex items-center gap-4">
+        <Notification />
         <button onClick={handleCreatePostClick} title="Создать пост">
-          <EditIcon width="24px" height="24px" className="cursor-pointer transition-transform mr-8" />
+          <EditIcon width="24px" height="24px" className="cursor-pointer transition-transform" />
         </button>
-
         {!session ? (
           <>
             <Button className="w-32 h-10" onClick={() => navigate("/login")}>

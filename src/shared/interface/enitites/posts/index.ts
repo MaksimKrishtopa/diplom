@@ -14,6 +14,11 @@ export interface PostPayload {
   favorited_by_user?: boolean;
 }
 
+export interface CreatePostPayload extends Omit<PostPayload, 'id'> {
+  id?: string;
+}
+
+
 
 export interface Theme {
   id: number;

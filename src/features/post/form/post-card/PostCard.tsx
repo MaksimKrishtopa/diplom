@@ -151,7 +151,7 @@ const PostCard = ({ post, themes, onDelete }: Props) => {
                 }
               }}
             >
-              Удалить
+              Удалить пост
             </button>
           </div>
         )}

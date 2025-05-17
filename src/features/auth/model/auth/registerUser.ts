@@ -1,5 +1,10 @@
 import { supabase } from "@/shared/config/supabaseClient";
 
+const convertDateToISO = (dateStr: string): string => {
+  const [day, month, year] = dateStr.split(".");
+  return `${year}-${month}-${day}`;
+};
+
 export const registerUser = async (userData: {
   email: string;
   password: string;
@@ -19,14 +24,17 @@ export const registerUser = async (userData: {
   const user = data.user;
   if (!user) throw new Error("Ошибка регистрации");
 
+  // Конвертируем дату в ISO перед вставкой
+  const birthDateISO = convertDateToISO(birth_date);
+
   const { error: insertError } = await supabase.from("users").insert([
     {
       id: user.id,
       email,
       user_name,
       real_name,
-      birth_date,
-      password
+      birth_date: birthDateISO, // тут ISO формат
+      password,
     },
   ]);
 

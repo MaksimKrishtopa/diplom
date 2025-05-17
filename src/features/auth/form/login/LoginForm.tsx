@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "@/features/auth/model/auth/loginUser";
+import style from "@/features/auth/form/login/style";
 
 const LoginForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -23,12 +24,26 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Вход</h2>
-      {message && <p>{message}</p>}
-      <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-      <input name="password" type="password" placeholder="Пароль" onChange={handleChange} required />
-      <button type="submit">Войти</button>
+    <form onSubmit={handleSubmit} className={style.form}>
+      <h2 className={style.title}>Авторизация</h2>
+      {message && <p className={style.message}>{message}</p>}
+      <input
+        name="email"
+        type="email"
+        placeholder="Email"
+        onChange={handleChange}
+        required
+        className={style.input}
+      />
+      <input
+        name="password"
+        type="password"
+        placeholder="Пароль"
+        onChange={handleChange}
+        required
+        className={style.input}
+      />
+      <button type="submit" className={style.button}>Войти</button>
     </form>
   );
 };

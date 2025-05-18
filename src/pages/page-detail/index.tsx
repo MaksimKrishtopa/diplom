@@ -1,13 +1,14 @@
 import PageDetail from "@/features/post/form/view-post/PageDetail";
 import BackButton from "@/shared/components/back-button";
+import style from "@/pages/page-detail/style";
 
 const PostPageDetail = () => {
   return (
-    <div className="relative">
-      <div className="absolute top-30 left-100 z-10">
+    <div className={style.wrapper}>
+      <div className={style.backButtonWrapper}>
         <BackButton />
       </div>
-      
+
       <PageDetail />
     </div>
   );

@@ -1,11 +1,11 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "@/shared/components/button";
-import { supabase } from "@/shared/config/supabaseClient";
 import { useAuth } from "@/shared/hooks/auth";
+import { supabase } from "@/shared/config/supabaseClient";
+import Button from "@/shared/components/button";
 import EditIcon from "@/shared/components/icons/create";
 import PostFeed from "@/features/content-feed/form/PostFeed";
 import { Notification } from "@/features/notification/form/Notification";
+import style from "@/pages/main/style";
 
 const MainPage = () => {
   const { session, isLoading } = useAuth();
@@ -27,23 +27,25 @@ const MainPage = () => {
   if (isLoading) return <div>Загрузка...</div>;
 
   return (
-    <div className="flex flex-col gap-4 p-4">
-      <div className="absolute top-4 right-4 flex items-center gap-4">
+    <div className={style.wrapper}>
+      <div className={style.topRightControls}>
         <Notification />
-        <button onClick={handleCreatePostClick} title="Создать пост">
-          <EditIcon width="24px" height="24px" className="cursor-pointer transition-transform" />
-        </button>
+        {session && (
+          <button onClick={handleCreatePostClick} title="Создать пост">
+            <EditIcon width="24px" height="24px" className={style.editIconButton} />
+          </button>
+        )}
         {!session ? (
           <>
-            <Button className="w-32 h-10" onClick={() => navigate("/login")}>
+            <Button className={style.buttonLogin} onClick={() => navigate("/login")}>
               Войти
             </Button>
-            <Button className="w-36 h-10" variant="primary" onClick={() => navigate("/register")}>
+            <Button className={style.buttonRegister} variant="primary" onClick={() => navigate("/register")}>
               Регистрация
             </Button>
           </>
         ) : (
-          <Button className="w-28 h-10" variant="primary" onClick={handleLogout}>
+          <Button className={style.buttonLogout} variant="primary" onClick={handleLogout}>
             Выйти
           </Button>
         )}

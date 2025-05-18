@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { fetchPostsWithThemes } from "@/entities/repository/postRepository";
-import { fetchThemes } from "@/entities/repository/postRepository";
+import { fetchPostsWithThemes, fetchThemes } from "@/entities/repository/postRepository";
 import { PostPayload, Theme } from "@/shared/interface/enitites/posts";
 import PostCard from "@/features/post/form/post-card/PostCard";
+import style from "@/features/content-feed/form/style";
 
 const PostFeed = () => {
   const [posts, setPosts] = useState<PostPayload[]>([]);
@@ -12,7 +12,7 @@ const PostFeed = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   const handleDeletePost = (postId: string) => {
-  setPosts((prev) => prev.filter((p) => p.id !== postId));
+    setPosts((prev) => prev.filter((p) => p.id !== postId));
   };
 
   useEffect(() => {
@@ -36,27 +36,23 @@ const PostFeed = () => {
     loadData();
   }, []);
 
-
   const sortedPosts = posts.sort((a, b) => {
     const dateA = a.created_at ? new Date(a.created_at).getTime() : 0;
-    const dateB = b.created_at ? new Date(b.created_at).getTime() : 0; 
-    
-    if (sortOrder === 'desc') {
-      return dateB - dateA;
-    }
-    return dateA - dateB;
+    const dateB = b.created_at ? new Date(b.created_at).getTime() : 0;
+
+    return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
   });
 
-  if (loading) return <p className="text-center">Загрузка...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (loading) return <p className={style.loading}>Загрузка...</p>;
+  if (error) return <p className={style.error}>{error}</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <div className="mb-4 flex justify-end">
+    <div className={style.container}>
+      <div className={style.sortWrapper}>
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
-          className="p-2 border border-gray-300 rounded"
+          className={style.select}
         >
           <option value="desc">Сортировать по дате (Сначала новые)</option>
           <option value="asc">Сортировать по дате (Сначала старые)</option>
@@ -64,7 +60,12 @@ const PostFeed = () => {
       </div>
 
       {sortedPosts.map((post) => (
-        <PostCard key={post.created_at + post.creator_id} post={post} themes={themes} onDelete={handleDeletePost} />
+        <PostCard
+          key={post.created_at + post.creator_id}
+          post={post}
+          themes={themes}
+          onDelete={handleDeletePost}
+        />
       ))}
     </div>
   );

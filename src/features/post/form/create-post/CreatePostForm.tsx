@@ -85,11 +85,11 @@ const CreatePostForm = forwardRef(({ userId }: { userId: string }, ref) => {
           className={style.locationInput}
         />
 
-        <div className="relative flex-1">
+        <div className={style.themeWrapper}>
           <button
             type="button"
             onClick={() => setIsThemeDropdownOpen(!isThemeDropdownOpen)}
-            className={`${style.themeSelect} flex justify-between items-center w-full`}
+            className={style.themeSelect}
           >
             <span>
               {form.theme_ids.length > 0

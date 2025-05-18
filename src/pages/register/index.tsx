@@ -1,8 +1,9 @@
 import RegisterForm from "@/features/auth/form/registration/RegisterForm";
+import style from "@/pages/register/style";
 
 const RegisterPage = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className={style.wrapper}>
       <RegisterForm />
     </div>
   );

@@ -2,6 +2,7 @@ import { useNotifications } from "@/features/notification/model/useNotifications
 import { useAuth } from "@/shared/hooks/auth";
 import { useState } from "react";
 import BellIcon from "@/shared/components/icons/notifications";
+import style from "@/features/notification/form/style";
 
 export const Notification = () => {
   const { session, isLoading: authLoading } = useAuth();
@@ -19,37 +20,37 @@ export const Notification = () => {
   if (authLoading || !userId) return null;
 
   return (
-    <div className="relative">
-      <button onClick={() => setIsOpen(!isOpen)} className="relative pt-1 cursor-pointer">
+    <div className={style.wrapper}>
+      <button onClick={() => setIsOpen(!isOpen)} className={style.button}>
         <BellIcon width="24px" height="24px" />
         {notifications.some(n => !n.is_read) && (
-          <span className="absolute top-0 right-0 bg-blue-500 w-2 h-2 rounded-full" />
+          <span className={style.unreadDot} />
         )}
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded">
+        <div className={style.dropdown}>
           {loading ? (
-            <p className="p-2 text-sm text-gray-500">Загрузка уведомлений...</p>
+            <p className={style.statusMessage}>Загрузка уведомлений...</p>
           ) : notifications.length === 0 ? (
-            <p className="p-2 text-sm text-gray-500">Нет уведомлений</p>
+            <p className={style.statusMessage}>Нет уведомлений</p>
           ) : (
             <ul>
               {notifications.map(n => (
-                <li key={n.id} className="p-2 text-sm">
+                <li key={n.id} className={style.notificationItem}>
                   <p>{n.content}</p>
-                  <div className="flex justify-between mt-1">
+                  <div className={style.actions}>
                     {!n.is_read && (
                       <button
                         onClick={() => handleMarkAsRead(n.id)}
-                        className="text-blue-500 text-xs cursor-pointer"
+                        className={style.markRead}
                       >
                         Пометить как прочитанное
                       </button>
                     )}
                     <button
                       onClick={() => handleDelete(n.id)}
-                      className="text-red-500 text-xs cursor-pointer"
+                      className={style.delete}
                     >
                       Удалить
                     </button>

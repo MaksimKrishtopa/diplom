@@ -42,16 +42,21 @@ const PageDetail = () => {
     fetchPostAndThemes();
   }, [postId]);
 
+  const handleDelete = (deletedPostId: string) => {
+    if (post?.id === deletedPostId) {
+      setPost(null);
+    }
+  };
+
   if (loading) return <p className={style.loadingText}>Загрузка...</p>;
-  if (!post) return <p className={style.errorText}>Пост не найден</p>;
+  if (!post) return <p className={style.errorText}>Пост не найден!</p>;
 
   return (
     <div className={style.container}>
       <div className={style.postWrapper}>
-        <PostCard post={post} themes={themes} />
+        <PostCard post={post} themes={themes} onDelete={handleDelete} />
       </div>
     </div>
   );
 };
-
 export default PageDetail;
